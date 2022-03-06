@@ -1,4 +1,4 @@
-package com.wp.bookhive.models;
+package com.wp.bookhive.models.enums;
 
 public enum Genres {
     HORROR,
