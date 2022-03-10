@@ -1,0 +1,157 @@
+/* The side navigation menu */
+.sidebar {
+    margin: 0;
+    padding: 0;
+    width: 180px;
+    background-color: #008C76;
+    position: fixed;
+    height: 100%;
+    overflow: auto;
+    /*top: 0; !* Stay at the top *!*/
+    left: 0;
+    font-size: 20px;
+}
+
+/* Sidebar links */
+.sidebar a {
+    display: block;
+    color: black;
+    padding: 16px;
+    text-decoration: none;
+}
+
+/* Active/current link */
+.sidebar a.active {
+    /*background-color: #555555;*/
+    color: #FC766A;
+
+}
+
+/* Links on mouse-over */
+.sidebar a:hover:not(.active) {
+    /*background-color: #555555;*/
+    color: #FC766A;
+}
+
+/* fix za ovoj? */
+#logout {
+    bottom: 0; !important;
+    position: relative; !important;
+    display: inline-block;
+    justify-self: flex-end;
+    align-self: flex-end;
+}
+
+/*!* Page content. The value of the margin-left property should match the value of the sidebar's width property *!*/
+/*div.content {*/
+/*    margin-left: 180px;*/
+/*    padding: 1px 16px;*/
+/*    height: 1000px;*/
+/*}*/
+
+.main {
+    margin-left: 170px;
+    padding: 1px 15px;
+}
+
+.top-bar {
+    /*margin-left: 170px; !* Same as the width of the sidebar *!*/
+    margin-right: -7px;
+    margin-left: -8px;
+    margin-top: -8px;
+    padding: 0px 10px;
+    /*background-color: #fbbebe;*/
+    background-color: #FFDDEE;
+    top: 0;
+    font-size: 20px;
+    height: 55px;
+}
+
+.top-bar a {
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 18px;
+    text-decoration: none;
+    display: block;
+    float: left;
+    color: black;
+}
+
+.top-bar a:hover {
+    color: #FC766A;
+}
+
+#bookhive {
+    margin-left: 10px; !important;
+}
+
+#my_profile {
+    padding-left: 5px; !important;
+    padding-right: 5px; !important;
+    padding-top: 18px; !important;
+    text-decoration: none; !important;
+    display: block; !important;
+    float: right; !important;
+    color: black; !important;
+}
+
+#my_profile_cont a:hover {
+    color: #FC766A; !important;
+}
+
+body {
+    background-color: #9ED9CC;
+}
+
+/* On screens that are less than 700px wide, make the sidebar into a topbar */
+@media screen and (max-width: 700px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+    .top-bar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        background-color: #fbbebe;
+    }
+    .top-bar a {
+        float: left;
+    }
+    .main {
+        width: 100%;
+        height: auto;
+        position: relative;
+        float: left;
+    }
+    .sidebar a {float: left;}
+}
+
+#logout{
+    position: absolute;
+    bottom: 55px; !important;
+}
+
+/* On screens that are less than 400px, display the bar vertically, instead of horizontally */
+@media screen and (max-width: 400px) {
+    .sidebar a {
+        text-align: center;
+        float: none;
+    }
+    .top-bar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        background-color: #fbbebe;
+    }
+    .top-bar a {
+        float: left;
+    }
+    .main {
+        width: 100%;
+        height: auto;
+        position: relative;
+        float: left;
+    }
+}
