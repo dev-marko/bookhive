@@ -3,10 +3,7 @@ package com.wp.bookhive.models;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
 
 @Data
@@ -15,6 +12,7 @@ import java.util.List;
 @Table(name = "bookhive_user")
 public class User {
     @Id
+    @GeneratedValue
     private int id;
     private String name;
     private String surname;

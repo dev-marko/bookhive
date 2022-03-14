@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{
+            background-color: #008C76;
+        }
+        #container{
+            display: flex;
+            flex-direction: column;
+        }
+        input{
+            width: 500px;
+            height: 40px;
+            margin: 20px;
+            background: transparent;
+            border: none;
+            border-bottom: 3px solid whitesmoke;
+            box-shadow: none;
+            font-size: 20px;
+            color: #fff;
+
+        }
+        input:hover{
+            border-bottom: 3px solid darkslategrey;
+        }
+        ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+            color: black;
+            opacity: 1; /* Firefox */
+        }
+
+    </style>
+</head>
+<body>
+<form method="post" th:action="@{/addbook}">
+<div id="container">
+<input th:value="${book?.name}" placeholder="Enter the name of the book" name="name">
+<input th:value="${book?.description}" placeholder="Enter the description of the book" name="description">
+<input th:value="${book?.isbn}" placeholder="Enter the isbn of the book" name="isbn">
+<input type="date" th:value="${book?.datePublished}" placeholder="Enter the publish date of the book" name="datePublished">
+<select name="authors" multiple>
+    <option th:selected="${book?.authors?.contains(author)}" th:each="author : ${authors}" th:text="${author.name}" th:value="${author.id}" > [author.name]</option>
+</select>
+<button type="submit">Save book</button>
+</form>
+</div>
+</body>
+</html>
