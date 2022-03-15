@@ -51,7 +51,7 @@
 <h3 class="logo">BOOKHIVE</h3>
 <div id="container">
     <div>
-        <form method="post" action="/login">
+        <form method="post" th:action="@{/login}">
         <input type="text" name="email" placeholder="Email"><br>
         <input type="text" name="password" placeholder="Password">
         <button id="loginbtn" class="btn btn-dark btn-lg" type="submit">Login</button>
