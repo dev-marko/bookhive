@@ -1,21 +1,22 @@
-package com.wp.bookhive.models;
+package com.wp.bookhive.models.entities;
 
+import com.wp.bookhive.models.enums.Roles;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
 
 @Data
 @Entity
 @NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "bookhive_user")
 public class User {
     @Id
-    private int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
     private String name;
     private String surname;
     private int age;
@@ -29,4 +30,6 @@ public class User {
     private String interests;
     @ManyToMany(mappedBy = "members")
     private List<BookClub> bookClubs;
+    @Enumerated
+    private Roles role = Roles.USER;
 }
