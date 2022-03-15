@@ -1,5 +1,13 @@
 package com.wp.bookhive.models.enums;
 
-public enum Roles {
-    USER, ADMIN
+import org.springframework.security.core.GrantedAuthority;
+
+public enum Roles implements GrantedAuthority {
+    ROLE_USER,
+    ROLE_ADMIN;
+
+    @Override
+    public String getAuthority() {
+        return name();
+    }
 }
