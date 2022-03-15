@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 @Data
 @Entity
@@ -18,11 +18,19 @@ public class Book {
     private String isbn;
     private String name;
     private String description;
-    private LocalDateTime datePublished;
+    private LocalDate datePublished;
     @ManyToMany
     private List<Author> authors;
 
-//    private Double price;
+    public Book(String isbn, String name, String description, LocalDate datePublished, List<Author> authors) {
+        this.isbn = isbn;
+        this.name = name;
+        this.description = description;
+        this.datePublished = datePublished;
+        this.authors = authors;
+    }
+
+    //    private Double price;
 //    private Double discount;
 //    treba da bidat vo relacijata pomegju book i bookshop
 

@@ -1,7 +1,7 @@
 package com.wp.bookhive.web.controllers;
 
-import com.wp.bookhive.models.Author;
-import com.wp.bookhive.models.Book;
+import com.wp.bookhive.models.entities.Author;
+import com.wp.bookhive.models.entities.Book;
 import com.wp.bookhive.repository.AuthorRepository;
 import com.wp.bookhive.repository.BookRepository;
 import org.springframework.format.annotation.DateTimeFormat;

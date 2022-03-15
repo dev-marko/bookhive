@@ -1,6 +1,6 @@
 package com.wp.bookhive.service;
 
-import com.wp.bookhive.models.User;
+import com.wp.bookhive.models.entities.User;
 import com.wp.bookhive.models.enums.Roles;
 import org.springframework.security.core.userdetails.UserDetailsService;
 

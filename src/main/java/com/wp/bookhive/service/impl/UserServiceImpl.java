@@ -1,6 +1,6 @@
 package com.wp.bookhive.service.impl;
 
-import com.wp.bookhive.models.User;
+import com.wp.bookhive.models.entities.User;
 import com.wp.bookhive.models.enums.Roles;
 import com.wp.bookhive.repository.UserRepository;
 import com.wp.bookhive.service.UserService;

@@ -1,6 +1,6 @@
 package com.wp.bookhive.repository;
 
-import com.wp.bookhive.models.User;
+import com.wp.bookhive.models.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

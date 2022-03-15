@@ -1,4 +1,4 @@
-package com.wp.bookhive.models;
+package com.wp.bookhive.models.entities;
 
 import com.wp.bookhive.models.enums.Roles;
 import lombok.Data;

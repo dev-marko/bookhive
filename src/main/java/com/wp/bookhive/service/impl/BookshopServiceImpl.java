@@ -1,4 +1,4 @@
-package com.wp.bookhive.service.serviceImpl;
+package com.wp.bookhive.service.impl;
 
 import com.wp.bookhive.models.entities.BookShop;
 import com.wp.bookhive.models.exceptions.*;

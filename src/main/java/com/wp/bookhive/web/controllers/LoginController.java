@@ -1,6 +1,6 @@
 package com.wp.bookhive.web.controllers;
 
-import com.wp.bookhive.models.User;
+import com.wp.bookhive.models.entities.User;
 import com.wp.bookhive.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
