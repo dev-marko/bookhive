@@ -42,15 +42,6 @@ public class UserServiceImpl implements UserService {
         return this.userRepository.save(user);
     }
 
-    @Override
-    public User login(String email, String password) {
-        // TODO custom exception
-        if (email == null || email.isEmpty() || password == null || password.isEmpty()) {
-            throw new InvalidParameterException();
-        }
-
-        return userRepository.findByEmailAndPassword(email, password).orElseThrow(InvalidParameterException::new);
-    }
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {

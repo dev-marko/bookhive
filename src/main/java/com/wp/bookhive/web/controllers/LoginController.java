@@ -25,23 +25,4 @@ public class LoginController {
     public String getLoginPage(){
         return "home";
     }
-
-    @PostMapping
-    public String postLogin(HttpServletRequest request, Model model) {
-        User user;
-
-        try {
-            user = this.userService.login(request.getParameter("email"), request.getParameter("password"));
-            request.getSession().setAttribute("user", user);
-            // TODO smeni go user_view vo tocniot redirect
-            return "user_view";
-        } catch (InvalidParameterException e) {
-            model.addAttribute("hasErrors", true);
-            model.addAttribute("error", e.getMessage());
-            return "home";
-        }
-
-    }
-
-
 }
