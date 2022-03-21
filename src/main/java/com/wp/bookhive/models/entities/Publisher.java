@@ -14,6 +14,7 @@ public class Publisher {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     private String name;
     private String address;
     private String email;
@@ -22,4 +23,5 @@ public class Publisher {
 
     @ManyToMany
     private List<Book> publishedBooks;
+
 }

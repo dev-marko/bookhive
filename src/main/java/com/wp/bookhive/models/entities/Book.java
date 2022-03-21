@@ -1,11 +1,13 @@
 package com.wp.bookhive.models.entities;
 
+import com.wp.bookhive.models.enums.Genres;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Collection;
 import java.util.List;
 @Data
 @Entity
@@ -22,6 +24,9 @@ public class Book {
     private String description;
     private LocalDate datePublished;
     private String coverImageUrl;
+
+    @ElementCollection
+    private List<Genres> genres;
 
     @ManyToMany
     private List<Author> authors;
