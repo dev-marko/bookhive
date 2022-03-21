@@ -25,10 +25,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().authorizeRequests()
-                .antMatchers("/register", "/login", "/**.jpg", "/**.png").permitAll()
+                .antMatchers("/home","/register", "/**.jpg", "/**.png").permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .formLogin().loginPage("/login")
+                .formLogin().loginPage("/home")
                 .defaultSuccessUrl("/user", true)
                 .failureUrl("/login?error=BadCredentials")
                 .and()

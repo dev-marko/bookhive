@@ -16,8 +16,15 @@
             width: 1000px;
             height: 500px;
             justify-content: space-between;
-            margin: auto;
-            margin-top:40px;
+            margin: 40px auto auto;
+        }
+
+        #left{
+            margin-top: 50px;
+        }
+
+        #right{
+
         }
 
 
@@ -37,7 +44,8 @@
             border-bottom: 3px solid greenyellow;
         }
         ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-            color: black;
+            color: white;
+            font-family: "Segoe UI", sans-serif;
             opacity: 1; /* Firefox */
         }
 
@@ -48,7 +56,8 @@
         }
         #logo{
             font-family: 'Fredoka', sans-serif;
-            font-size: 40px;
+            font-size: 50px;
+            color: white;
         }
 
 
@@ -57,19 +66,19 @@
 </head>
 <body>
 <div id="container">
-    <div>
-        <form method="post" th:action="@{/login}">
+    <div id="left">
+        <form method="post" th:action="@{/home}">
         <input type="text" name="username" placeholder="Email"><br>
         <input type="text" name="password" placeholder="Password">
         <button id="loginbtn" class="btn btn-dark btn-lg" type="submit">Login</button>
         </form>
-        <br><br><br><br><br><br>
+        <br>
         <a href="/register" id="registerbtn" class="btn btn-dark btn-lg" type="submit">Register</a>
         <a href="/springsocial" id="springsocialbtn" class="btn btn-dark btn-lg" type="submit">Spring Social</a>
     </div>
-    <div id="container2">
-        <h3 id="logo" class="text-center">BOOKHIVE</h3>
-        <img src="/library.png" width="600" height="600" alt="library"/>
+    <div id="right">
+        <h3 id="logo" class="text-center">Bookhive</h3>
+        <img src="/library.png" width="550" height="550" alt="library"/>
     </div>
 </div>
 
