@@ -38,6 +38,14 @@ public class User implements UserDetails {
     @ManyToMany
     private List<Book> booksOwned;
 
+    @ManyToMany
+    @JoinTable(
+            name = "user_wishlist",
+            joinColumns = {@JoinColumn(name = "fk_user")},
+            inverseJoinColumns = {@JoinColumn(name = "fk_book")}
+    )
+    private List<Book> wishlist;
+
     @ManyToMany(mappedBy = "members")
     private List<BookClub> bookClubs;
 

@@ -10,6 +10,7 @@ import java.util.List;
 @AllArgsConstructor
 @Data
 public class Publisher {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -18,6 +19,7 @@ public class Publisher {
     private String email;
     private String phoneNumber;
     private String webSiteLink;
+
     @ManyToMany
     private List<Book> publishedBooks;
 }

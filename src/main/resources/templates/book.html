@@ -35,8 +35,8 @@
     </style>
 </head>
 <body>
-<form method="post" th:action="@{/addbook}">
 <div id="container">
+<form method="post" th:action="@{/addbook}">
 <input th:value="${book?.name}" placeholder="Enter the name of the book" name="name" required>
 <input th:value="${book?.description}" placeholder="Enter the description of the book" name="description" required>
 <input th:value="${book?.isbn}" placeholder="Enter the isbn of the book" name="isbn" required>
