@@ -21,6 +21,7 @@ public class Book {
     private String name;
     private String description;
     private LocalDate datePublished;
+    private String coverImageUrl;
 
     @ManyToMany
     private List<Author> authors;
