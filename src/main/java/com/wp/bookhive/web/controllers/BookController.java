@@ -1,6 +1,7 @@
 package com.wp.bookhive.web.controllers;
 
 
+import com.wp.bookhive.models.entities.Book;
 import com.wp.bookhive.service.AuthorService;
 import com.wp.bookhive.service.BookService;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -11,8 +12,14 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.util.List;
 
+/*
+24.03.2022
+promeniv RequestMapping od /addbook vo /books
+Treba i za Edit da se smeni vo /edit/{id}
+ */
+
 @Controller
-@RequestMapping("/addbook")
+@RequestMapping("/books")
 public class BookController {
 
     private final BookService bookService;
@@ -24,6 +31,13 @@ public class BookController {
     }
 
     @GetMapping
+    public String getAllBooks(Model model) {
+        List<Book> books = this.bookService.findAll();
+        model.addAttribute("books", books);
+        return "books";
+    }
+
+    @GetMapping("/addbook")
     public String getAddBook(Model model){
         model.addAttribute("authors", this.authorService.findAll());
         return "book";
