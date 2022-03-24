@@ -12,6 +12,8 @@
         #container{
             display: flex;
             flex-direction: column;
+            width: 600px;
+            margin: 40px auto auto;
         }
         input{
             width: 500px;
@@ -29,13 +31,15 @@
             border-bottom: 3px solid darkslategrey;
         }
         ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-            color: black;
+            color: white;
             opacity: 1; /* Firefox */
         }
     </style>
 
 </head>
 <body>
+
+
 <form method="post" th:action="@{'/addauthor/{id}' (id=${author?.id})}">
 <div id="container">
 <input th:value="${author?.name}" placeholder="Enter the name of the author" name="name" required>
