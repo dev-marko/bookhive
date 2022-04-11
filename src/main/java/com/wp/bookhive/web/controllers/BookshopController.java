@@ -18,6 +18,13 @@ public class BookshopController {
         this.bookshopService = bookshopService;
     }
 
+    @GetMapping("/test")
+    public String test(Model model) {
+        List<BookShop> bookshopList = this.bookshopService.getAllBookshops();
+        model.addAttribute("bookshops", bookshopList);
+        return "bookshop";
+    }
+
     @GetMapping("/all")
     public String getAllBookshops(Model model) {
         List<BookShop> bookshopList = this.bookshopService.getAllBookshops();
