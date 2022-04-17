@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>About author</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap" rel="stylesheet">
+
+    <style>
+
+        body{
+            /*background-color: #FC766A;*/
+            /*background-color: goldenrod;*/
+            background-color: #9ed9cc;
+            /*background-color: #008C76;*/
+            font-family: 'IBM Plex Sans', sans-serif;
+            font-size: 30px;
+        }
+        h1{
+            font-family: 'Oswald', sans-serif;
+        }
+        h3{
+            /*color: #FC766A;*/
+        }
+        #container{
+            display: flex;
+            justify-content: space-between;
+            width: 80%;
+            margin: 40px auto auto;
+        }
+
+        #middle{
+            width: 80%;
+            margin: 40px auto auto;
+        }
+        #books{
+            width: 80%;
+            margin: 40px auto auto;
+        }
+        li {
+            margin-bottom: 15px;
+            list-style-image: url(/book_resized.png);
+        }
+
+
+    </style>
+</head>
+<body>
+<div id="container">
+    <div id="left">
+        <h1 th:text="${author?.name + ' ' + author?.surname}">The name of the author</h1>
+        <h3 th:text="${author?.age} + ' years old'">The age of the author</h3>
+    </div>
+    <div id="right">
+        <img id="avatar" src="/writer.png" height="300" width="300"/>
+    </div>
+</div>
+
+<div id="middle"><p th:text="${author.biography}">The biography of the author</p></div>
+
+<div id="books" th:if="${author?.publishedBooks.size()>0}">
+    <h2>Some of his books</h2>
+    <ul>
+        <li th:each="book : ${author?.publishedBooks}" th:text="${book.name}"></li>
+    </ul>
+</div>
+</body>
+</html>
