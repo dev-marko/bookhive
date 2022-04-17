@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping("/admin")
+@RequestMapping("/bookshop")
 @Controller
 public class BookshopController {
 
@@ -40,8 +40,7 @@ public class BookshopController {
         return ""; //sega za sega vaka neka stoi pa ke vidime otposle sto ke se vrakja i dali ke postoi ovaa metoda
     }
 
-    //edit na books
-    //plus knigi
+    //edit na bookshop info
     @PostMapping()
     public String saveBookshop(@RequestParam(required = false) Integer bookshopId,
                                @RequestParam String address,
@@ -59,6 +58,26 @@ public class BookshopController {
             this.bookshopService.save(address, city, name, bookshopEmail, phoneNumber, webSiteLink, latitude, longitude);
         }
         return ""; //sega za sega vaka neka stoi pa ke vidime otposle sto ke se vrakja i dali ke postoi ovaa metoda
+    }
+
+    @GetMapping("/edit/{bookshopId}/add-book")
+    public String getAddBookForm(@PathVariable Integer bookshopId, Model model) {
+        BookShop bookshop = this.bookshopService.findById(bookshopId);
+        model.addAttribute("bookshop", bookshop);
+        return ""; //blagoj view
+    }
+
+    //edit na bookshop books
+    @PostMapping("/edit/{bookshopId}/add-book")
+    public String addBook(@PathVariable Integer bookshopId,
+                          @RequestParam String isbn,
+                          @RequestParam String name,
+                          @RequestParam String description,
+                          @RequestParam String datePublished,
+                          Model model) {
+        //lista od avtori
+        //this.bookshopService.addBook(bookshopId, isbn, name, description, datePublished);
+        return ""; //redirect kon @GetMapping("/{bookshopId}")
     }
 
     @DeleteMapping("/{bookshopId}")

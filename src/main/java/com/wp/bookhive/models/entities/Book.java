@@ -1,5 +1,6 @@
 package com.wp.bookhive.models.entities;
 
+import com.wp.bookhive.models.enums.Genres;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,6 +8,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
+
 @Data
 @Entity
 @NoArgsConstructor
