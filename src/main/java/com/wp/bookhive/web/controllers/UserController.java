@@ -9,6 +9,6 @@ public class UserController {
 
     @GetMapping("/user")    //dali da se stavi @PathVariable za userId?
     public String getUserViewPage() {
-        return "user_view";
+        return "index";
     }
 }
