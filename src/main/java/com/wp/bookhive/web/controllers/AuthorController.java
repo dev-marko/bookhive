@@ -50,11 +50,13 @@ public class AuthorController {
                                 @PathVariable Integer id,
                                 @RequestParam String name,
                                 @RequestParam String surname,
-                                @RequestParam Integer age) throws Exception {
+                                @RequestParam Integer age,
+                                @RequestParam(required = false) String biography) throws Exception {
         Author author = this.authorRepository.findById(id).orElseThrow(()->new AuthorNotFoundException(id));
         author.setName(name);
         author.setSurname(surname);
         author.setAge(age);
+        author.setBiography(biography);
         authorRepository.save(author);
         return "redirect:/";
     }

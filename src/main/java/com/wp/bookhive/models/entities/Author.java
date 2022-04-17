@@ -39,4 +39,10 @@ public class Author {
         this.biography = biography;
         this.publishedBooks = publishedBooks;
     }
+
+    public Author(String name, String surname, Integer age) {
+        this.name = name;
+        this.surname = surname;
+        this.age = age;
+    }
 }
