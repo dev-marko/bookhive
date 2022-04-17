@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
           integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
           crossorigin="" />
@@ -26,7 +29,6 @@
             /*background-color: #9ed9cc;*/
             /*background-color: #008C76;*/
             font-family: 'IBM Plex Sans', sans-serif;
-            font-size: 30px;
         }
         #map{
             width: auto;
@@ -36,13 +38,15 @@
 
 </head>
 <body>
+<h1 style="font-family: 'Oswald', sans-serif;" class="text-center">Преглед на книжарите во кои што може да ја најдете избраната книга:</h1>
 <div id="map"></div>
-<div id="information">
+<div style="margin-top: 30px; margin-left: 30px; margin-right: 30px;  font-size: 25px;" id="information">
     <div id="distance"></div>
     <div id="duration"></div>
 </div>
 
 
 <script src="/bookshop_geolocation.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
 </html>
