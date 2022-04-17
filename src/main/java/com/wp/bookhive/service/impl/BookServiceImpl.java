@@ -3,9 +3,14 @@ package com.wp.bookhive.service.impl;
 import com.wp.bookhive.models.entities.Author;
 import com.wp.bookhive.models.entities.Book;
 import com.wp.bookhive.models.exceptions.BookNotFoundException;
+import com.wp.bookhive.models.pages.BookPage;
 import com.wp.bookhive.repository.AuthorRepository;
 import com.wp.bookhive.repository.BookRepository;
 import com.wp.bookhive.service.BookService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -25,6 +30,17 @@ public class BookServiceImpl implements BookService {
     @Override
     public List<Book> findAll() {
         return this.bookRepository.findAll();
+    }
+
+    @Override
+    public Page<Book> findByPage(BookPage bookPage) {
+        Sort sort = Sort.by(bookPage.getSortDirection(), bookPage.getSortBy());
+        Pageable pageable = PageRequest.of(
+                bookPage.getCurrentPage(),
+                bookPage.getPageSize(),
+                sort);
+
+        return this.bookRepository.findAll(pageable);
     }
 
     @Override

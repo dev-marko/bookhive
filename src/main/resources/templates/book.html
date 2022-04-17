@@ -40,14 +40,15 @@
 </head>
 <body>
 <div id="container">
-<form method="post" th:action="@{/addbook}">
+<form method="post" th:action="@{/books/add}">
+<input id="id" type="hidden" name="id" th:value="(${book} != null ? ${book.getId()} : '')"/>
 <input th:value="${book?.name}" placeholder="Enter the name of the book" name="name" required>
 <input th:value="${book?.description}" placeholder="Enter the description of the book" name="description" required>
 <input th:value="${book?.isbn}" placeholder="Enter the ISBN of the book" name="isbn" required>
 <input type="text" onfocus="(this.type='date')" onblur="if(!this.value) this.type='text'" th:value="${book?.datePublished}" placeholder="Enter the publish date of the book" name="datePublished" required>
     <h4>Select the authors of the book</h4>
 <select class="form-control" name="authors" multiple required>
-    <option th:selected="${book?.authors?.contains(author)}" th:each="author : ${authors}" th:text="${author.name}" th:value="${author.id}" > [author.name]</option>
+    <option th:selected="${book?.authors?.contains(author)}" th:each="author : ${authors}" th:text="${author.name} + ' ' + ${author.surname}" th:value="${author.id}" > [author.name]</option>
 </select>
     <div style="display: flex;">
     <button class="btn btn-dark btn-lg m-2" type="submit">Save book</button>

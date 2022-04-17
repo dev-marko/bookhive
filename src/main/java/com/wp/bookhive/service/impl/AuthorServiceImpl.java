@@ -37,18 +37,19 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    public Author add(String name, String surname, Integer age, List<Integer> publishedBooksIds) {
+    public Author add(String name, String surname, Integer age, String biography, List<Integer> publishedBooksIds) {
         List<Book> books = this.bookRepository.findAllById(publishedBooksIds);
-        return this.authorRepository.save(new Author(name, surname, age, books));
+        return this.authorRepository.save(new Author(name, surname, age, biography, books));
     }
 
     @Override
-    public Author edit(Integer id, String name, String surname, Integer age, List<Integer> publishedBooksIds) {
+    public Author edit(Integer id, String name, String surname, Integer age, String biography, List<Integer> publishedBooksIds) {
         Author author = this.findById(id);
 
         author.setName(name);
         author.setSurname(surname);
         author.setAge(age);
+        author.setBiography(biography);
         List<Book> books = this.bookRepository.findAllById(publishedBooksIds);
         author.setPublishedBooks(books);
 

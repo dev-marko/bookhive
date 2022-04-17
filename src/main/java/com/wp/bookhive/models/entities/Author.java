@@ -24,17 +24,19 @@ public class Author {
     @ManyToMany(mappedBy = "authors")
     private List<Book> publishedBooks;
 
-    public Author(String name, String surname, Integer age) {
+    public Author(String name, String surname, Integer age, String biography) {
         this.name = name;
         this.surname = surname;
         this.age = age;
+        this.biography = biography;
         this.publishedBooks = new ArrayList<>();
     }
 
-    public Author(String name, String surname, Integer age, List<Book> publishedBooks) {
+    public Author(String name, String surname, Integer age, String biography, List<Book> publishedBooks) {
         this.name = name;
         this.surname = surname;
         this.age = age;
+        this.biography = biography;
         this.publishedBooks = publishedBooks;
     }
 }

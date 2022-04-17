@@ -36,11 +36,16 @@ public class User implements UserDetails {
     private String interests;
 
     @ManyToMany
+    @JoinTable(
+            name = "my_books",
+            joinColumns = {@JoinColumn(name = "fk_user")},
+            inverseJoinColumns = {@JoinColumn(name = "fk_book")}
+    )
     private List<Book> booksOwned;
 
-    @ManyToMany
+    @OneToMany
     @JoinTable(
-            name = "user_wishlist",
+            name = "my_wishlist",
             joinColumns = {@JoinColumn(name = "fk_user")},
             inverseJoinColumns = {@JoinColumn(name = "fk_book")}
     )
