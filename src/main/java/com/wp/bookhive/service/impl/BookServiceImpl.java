@@ -74,6 +74,13 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    public Book editLastPage(Integer id, Integer lastPage) {
+        Book book = this.findById(id);
+        book.setTestCounter(lastPage);
+        return this.bookRepository.save(book);
+    }
+
+    @Override
     public void deleteById(Integer id) {
         this.bookRepository.deleteById(id);
     }

@@ -9,6 +9,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @Entity
@@ -25,12 +26,16 @@ public class Book {
     private String description;
     private LocalDate datePublished;
     private String coverImageUrl;
+    private Integer testCounter;
 
     @ElementCollection
     private List<Genres> genres;
 
     @ManyToMany
     private List<Author> authors;
+
+    @OneToMany(mappedBy = "book")
+    private List<UserBook> userBooks;
 
     public Book(String isbn, String name, String description, LocalDate datePublished, List<Author> authors) {
         this.isbn = isbn;

@@ -14,5 +14,6 @@ public interface BookService {
     Book findByIsbn(String isbn);
     Book add(String isbn, String name, String description, LocalDate datePublished, List<Integer> authorIds);
     Book edit(Integer id, String isbn, String name, String description, LocalDate datePublished, List<Integer> authorIds);
+    Book editLastPage(Integer id, Integer lastPage);
     void deleteById(Integer id);
 }

@@ -1,10 +1,12 @@
 <th:block xmlns:th="http://www.thymeleaf.org">
     <div class="container">
+        <a th:href="@{/authors/add}" class="btn text-white mb-3" style="background-color: #008C76;">Add Author</a>
         <table class="table">
             <thead>
             <tr>
                 <th scope="col">Name</th>
                 <th scope="col">Surname</th>
+                <th scope="col"></th>
                 <th scope="col"></th>
             </tr>
             </thead>
@@ -12,7 +14,11 @@
             <tr th:each="author : ${authors}">
                 <td th:text="${author.getName()}"></td>
                 <td th:text="${author.getSurname()}"></td>
-                <td><a th:href="@{'/authors/biography/{id}' (id=${author.getId()})}" class="btn btn-sm btn-info">Details</a></td>
+                <td colspan="2">
+                    <a th:href="@{'/authors/biography/{id}' (id=${author.getId()})}"
+                       class="btn btn-sm btn-info">Details</a>
+                    <a th:href="@{'/authors/{id}' (id=${author.getId()})}" class="btn btn-sm btn-warning">Edit</a>
+                </td>
             </tr>
             </tbody>
         </table>

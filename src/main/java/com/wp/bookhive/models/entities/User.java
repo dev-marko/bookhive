@@ -10,6 +10,7 @@ import javax.persistence.*;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @Entity
@@ -35,13 +36,8 @@ public class User implements UserDetails {
     private String biography;
     private String interests;
 
-    @ManyToMany
-    @JoinTable(
-            name = "my_books",
-            joinColumns = {@JoinColumn(name = "fk_user")},
-            inverseJoinColumns = {@JoinColumn(name = "fk_book")}
-    )
-    private List<Book> booksOwned;
+    @OneToMany(mappedBy = "user")
+    private List<UserBook> userBooks;
 
     @OneToMany
     @JoinTable(

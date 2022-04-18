@@ -30,10 +30,11 @@ public class AuthorController {
 
     @PostMapping
     public String postAddAuthor(@RequestParam String name,
-                             @RequestParam String surname,
-                             @RequestParam Integer age){
-        this.authorRepository.save(new Author(name, surname, age));
-        return "redirect:/";
+                                @RequestParam String surname,
+                                @RequestParam Integer age,
+                                @RequestParam(required = false) String biography){
+        this.authorRepository.save(new Author(name, surname, age, biography));
+        return "redirect:/authors";
     }
 
     @GetMapping("/{id}")
@@ -63,13 +64,13 @@ public class AuthorController {
         author.setAge(age);
         author.setBiography(biography);
         authorRepository.save(author);
-        return "redirect:/";
+        return "redirect:/authors";
     }
 
 
     @PostMapping("/{id}/delete")
     public String deleteAuthor(@PathVariable Integer id){
         authorRepository.deleteById(id);
-        return "redirect:/";
+        return "redirect:/authors";
     }
 }
