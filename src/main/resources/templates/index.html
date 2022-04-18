@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -35,17 +35,29 @@
             </div>
 
             <ul class="list-unstyled components">
-                <li class="active">
-                    <a href="#" >Home</a>
+                <li>
+                    <a th:href="@{/user}" >Home</a>
                 </li>
                 <li>
-                    <a href="#">My books</a>
+                    <a th:href="@{/my-books}">My Books</a>
                 </li>
                 <li>
-                    <a href="#">My bookclub</a>
+                    <a href="#">My Book Clubs</a>
                 </li>
                 <li>
-                    <a href="#">Bookstores</a>
+                    <a th:href="@{/my-wishlist}">My Wishlist</a>
+                </li>
+                <li>
+                    <a th:href="@{/books}">Books</a>
+                </li>
+                <li>
+                    <a th:href="@{/authors}">Authors</a>
+                </li>
+                <li>
+                    <a th:href="@{#}">Book Clubs</a>
+                </li>
+                <li>
+                    <a th:href="@{/bookshop/all}">Bookshops</a>
                 </li>
 <!--                <li>-->
 <!--                    <a href="#">Logout</a>-->
@@ -78,7 +90,7 @@
                 </div>
             </nav>
 
-            <div>   <!-- BODY CONTENT -->
+            <div th:include="${bodyContent}">   <!-- BODY CONTENT -->
 
             </div>
 

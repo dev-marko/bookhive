@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/addauthor")
+@RequestMapping("/authors")
 public class AuthorController {
     private final AuthorRepository authorRepository;
 
@@ -17,11 +17,16 @@ public class AuthorController {
     }
 
     @GetMapping
-    public String getAddAuthor(){
-        return "author";
+    public String getAllAuthors(Model model) {
+        model.addAttribute("authors", this.authorRepository.findAll());
+        model.addAttribute("bodyContent", "authors");
+        return "index";
     }
 
-
+    @GetMapping("/add")
+    public String getAddAuthor(){
+        return "add-author";
+    }
 
     @PostMapping
     public String postAddAuthor(@RequestParam String name,
@@ -35,7 +40,7 @@ public class AuthorController {
     public String getEditAuthor(@PathVariable Integer id, Model model) throws Exception {
         Author author = authorRepository.findById(id).orElseThrow(()->new AuthorNotFoundException(id));
         model.addAttribute("author", author);
-        return "author";
+        return "add-author";
     }
 
     @GetMapping("/biography/{id}")

@@ -7,6 +7,8 @@ import com.wp.bookhive.repository.UserRepository;
 import com.wp.bookhive.service.UserBooksService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserBooksServiceImpl implements UserBooksService {
 
@@ -14,6 +16,18 @@ public class UserBooksServiceImpl implements UserBooksService {
 
     public UserBooksServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
+    }
+
+    @Override
+    public List<Book> getMyBooks(Integer userId) {
+        User user = this.userRepository.findByIdEagerBooks(userId).orElseThrow(() -> new UserNotFoundException(userId));
+        return user.getBooksOwned();
+    }
+
+    @Override
+    public List<Book> getMyWishlist(Integer userId) {
+        User user = this.userRepository.findByIdEagerBooks(userId).orElseThrow(() -> new UserNotFoundException(userId));
+        return user.getWishlist();
     }
 
     @Override

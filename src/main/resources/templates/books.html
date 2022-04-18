@@ -1,82 +1,70 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Books</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-</head>
-<body style="background-color: #9ED9CC;">
-
-<div class="container-lg">
-    <div class="row col-lg-2 my-5 align-items-start justify-content-start">
-        <a th:href="@{/books/form}" class="btn btn-outline-primary">
-            Add Book
-        </a>
-    </div>
-    <div class="row my-5 align-items-center justify-content-center">
-        <div th:each="book : ${books.getContent()}"
-             class="col-5 col-lg-4 col-xl-3">
-            <div class="card shadow border-0 w-100 h-100">
-                <div class="card-body text-center py-4">
-                    <img class="card-img w-50"
-                         th:src="${book.getCoverImageUrl()}"
-                         alt="crime and punishment" style="height: 200px;"/>
-                    <h5 class="card-title mt-1 mb-0" th:text="${book.getName()}">
-                        <!--Злосторство и казна-->
-                    </h5>
-                    <p class="card-subtitle fs-6 fst-italic mt-0 mb-3"
-                       th:text="${book.getAuthors().get(0).getName() + ' ' + book.getAuthors().get(0).getSurname()}">
-                        <!--автор: Фјодор Достоевски-->
-                        <!-- ke ni treba BookDto za books.html stranava-->
-                    </p>
-                    <p class="card-text text-muted d-none d-lg-block" th:text="${book.getDescription()}">
-                        <!-- Lorem ipsum dolor, sit amet consectetur adipisicing elit. -->
-                    </p>
-                    <div class="me-2">
-                        <div class="d-inline-block p-0">
-                            <form th:method="POST"
-                                  th:action="@{'/my-wishlist/add/{id}' (id=${book.getId()})}">
-                                <button type="submit" class="btn btn-sm text-white mt-3"
-                                        style="background-color: #008C76;">
-                                    Wishlist
-                                </button>
-                            </form>
-                        </div>
-                        <div class="d-inline-block p-0">
-                            <a href="#" class="btn btn-sm text-white mt-3" style="background-color: #008C76;">
-                                Details
-                            </a>
-                        </div>
-                        <div class="d-inline-block p-0">
-                            <form th:method="POST"
-                                  th:action="@{'/my-books/add/{id}' (id=${book.getId()})}">
-                                <button type="submit" class="btn btn-sm text-white mt-3"
-                                        style="background-color: #008C76;">
-                                    My Books
-                                </button>
-                            </form>
+<th:block xmlns:th="http://www.thymeleaf.org">
+    <div class="container-lg">
+        <div class="row col-lg-2 my-5 align-items-start justify-content-start">
+            <a th:href="@{/books/form}" class="btn btn-outline-primary">
+                Add Book
+            </a>
+        </div>
+        <div class="row my-5 align-items-center justify-content-center">
+            <div th:each="book : ${books.getContent()}"
+                 class="col-5 col-lg-4 col-xl-3">
+                <div class="card shadow border-0 w-100 h-100">
+                    <div class="card-body text-center py-4">
+                        <img class="card-img w-50"
+                             th:src="${book.getCoverImageUrl()}"
+                             alt="crime and punishment" style="height: 200px;"/>
+                        <h5 class="card-title mt-1 mb-0" th:text="${book.getName()}">
+                            <!--Злосторство и казна-->
+                        </h5>
+                        <p class="card-subtitle fs-6 fst-italic mt-0 mb-3">
+                        <span th:each="author : ${book.getAuthors()}"
+                              th:text="${author.getName() + ' ' + author.getSurname()}"></span>
+                            <!--автор: Фјодор Достоевски-->
+                            <!-- ke ni treba BookDto za books.html stranava-->
+                        </p>
+                        <p class="card-text text-muted d-none d-lg-block" th:text="${book.getDescription()}">
+                            <!-- Lorem ipsum dolor, sit amet consectetur adipisicing elit. -->
+                        </p>
+                        <div class="me-2">
+                            <div class="d-inline-block p-0">
+                                <form th:method="POST"
+                                      th:action="@{'/my-wishlist/add/{id}' (id=${book.getId()})}">
+                                    <button type="submit" class="btn btn-sm text-white mt-3"
+                                            style="background-color: #008C76;">
+                                        Wishlist
+                                    </button>
+                                </form>
+                            </div>
+                            <div class="d-inline-block p-0">
+                                <a href="#" class="btn btn-sm text-white mt-3" style="background-color: #008C76;">
+                                    Details
+                                </a>
+                            </div>
+                            <div class="d-inline-block p-0">
+                                <form th:method="POST"
+                                      th:action="@{'/my-books/add/{id}' (id=${book.getId()})}">
+                                    <button type="submit" class="btn btn-sm text-white mt-3"
+                                            style="background-color: #008C76;">
+                                        My Books
+                                    </button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="row col-lg-2 my-5 align-items-start justify-content-start">
+        </div>
+        <nav class="row my-5 align-items-center justify-content-center" aria-label="Page navigation example">
+            <ul class="pagination align-items-center justify-content-center">
+                <li th:if="${books.totalPages}" th:each="pageNumber : ${pageNumbers}" class="page-item">
+                    <a class="page-link"
+                       th:href="@{/books(size=${books.size}, page=${pageNumber})}"
+                       th:text="${pageNumber}" th:class="${pageNumber==books.number + 1} ? active"></a>
+                </li>
+            </ul>
+        </nav>
     </div>
-    <div class="row col-lg-2 my-5 align-items-start justify-content-start">
-    </div>
-    <nav class="row my-5 align-items-center justify-content-center" aria-label="Page navigation example">
-        <ul class="pagination align-items-center justify-content-center">
-            <li th:if="${books.totalPages}" th:each="pageNumber : ${pageNumbers}" class="page-item">
-                <a class="page-link"
-                   th:href="@{/books(size=${books.size}, page=${pageNumber})}"
-                   th:text="${pageNumber}" th:class="${pageNumber==books.number + 1} ? active"></a>
-            </li>
-        </ul>
-    </nav>
-</div>
+</th:block>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-        crossorigin="anonymous"></script>
-</body>
-</html>

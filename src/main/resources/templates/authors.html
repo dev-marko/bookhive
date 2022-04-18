@@ -1,0 +1,20 @@
+<th:block xmlns:th="http://www.thymeleaf.org">
+    <div class="container">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Surname</th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="author : ${authors}">
+                <td th:text="${author.getName()}"></td>
+                <td th:text="${author.getSurname()}"></td>
+                <td><a th:href="@{'/authors/biography/{id}' (id=${author.getId()})}" class="btn btn-sm btn-info">Details</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</th:block>

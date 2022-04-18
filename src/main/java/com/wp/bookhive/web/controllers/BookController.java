@@ -58,10 +58,12 @@ public class BookController {
             model.addAttribute("pageNumbers", pageNumbers);
         }
 
+        model.addAttribute("bodyContent", "books");
+
         // TODO: Treba da stavam barem uste 2-3 knigi za da isprobam paginacijata
         // TODO: sredi na sekoja cetvrta kniga da se prefrla vo nov red.
 
-        return "books";
+        return "index";
     }
 
     @GetMapping("/form")
