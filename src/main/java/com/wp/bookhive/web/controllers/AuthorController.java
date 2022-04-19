@@ -44,7 +44,7 @@ public class AuthorController {
         return "add-author";
     }
 
-    @GetMapping("/biography/{id}")
+    @GetMapping("{id}/view")
     public String getAuthorBiography(@PathVariable Integer id, Model model) throws Exception {
         Author author = authorRepository.findById(id).orElseThrow(()->new AuthorNotFoundException(id));
         model.addAttribute("author", author);

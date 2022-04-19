@@ -18,7 +18,7 @@ public class BookshopController {
         this.bookshopService = bookshopService;
     }
 
-    @GetMapping("/test")
+    @GetMapping("/map")
     public String test(Model model) {
         List<BookShop> bookshopList = this.bookshopService.getAllBookshops();
         model.addAttribute("bookshops", bookshopList);

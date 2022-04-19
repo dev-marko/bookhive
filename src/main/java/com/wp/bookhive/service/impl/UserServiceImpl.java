@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User register(String email, String password, String repeatPassword, Roles role) {
+    public User register(String name, String surname, String email, String password, String repeatPassword, Roles role) {
         // TODO custom exception
         if (email==null || email.isEmpty()  || password==null || password.isEmpty())
             throw new InvalidParameterException();
@@ -50,7 +50,8 @@ public class UserServiceImpl implements UserService {
             //TODO: throw new UsernameAlreadyExistsException(email);
             throw new BadCredentialsException("Invalid Credentials");
 
-        User user = new User(email,passwordEncoder.encode(password), role);
+        User user = new User(name, surname, email, passwordEncoder.encode(password), role);
+
 
         return this.userRepository.save(user);
     }

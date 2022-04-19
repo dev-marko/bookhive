@@ -3,6 +3,7 @@ package com.wp.bookhive.web.controllers;
 
 import com.wp.bookhive.models.entities.Book;
 import com.wp.bookhive.models.pages.BookPage;
+import com.wp.bookhive.repository.BookshopRepository;
 import com.wp.bookhive.service.AuthorService;
 import com.wp.bookhive.service.BookService;
 import org.springframework.data.domain.Page;
@@ -29,10 +30,12 @@ public class BookController {
 
     private final BookService bookService;
     private final AuthorService authorService;
+    private final BookshopRepository bookshopRepository;
 
-    public BookController(BookService bookService, AuthorService authorService) {
+    public BookController(BookService bookService, AuthorService authorService, BookshopRepository bookshopRepository) {
         this.bookService = bookService;
         this.authorService = authorService;
+        this.bookshopRepository = bookshopRepository;
     }
 
     @GetMapping
@@ -95,6 +98,14 @@ public class BookController {
         model.addAttribute("book", this.bookService.findById(id));
         model.addAttribute("authors", this.authorService.findAll());
         return "book";
+    }
+    @GetMapping("/{id}/view")
+    public String getViewBook(@PathVariable Integer id, Model model) throws Exception {
+        Book book = this.bookService.findById(id);
+        model.addAttribute("book", book);
+        model.addAttribute("authors", book.getAuthors().stream().map(x -> x.getName() + " " + x.getSurname()).collect(Collectors.toList()));
+        model.addAttribute("bookshops", this.bookshopRepository.getAllByBooks(book));
+        return "book_bio";
     }
 
     @PostMapping("/{id}/delete")

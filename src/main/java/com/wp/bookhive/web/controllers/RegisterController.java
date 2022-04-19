@@ -36,16 +36,17 @@ public class RegisterController {
     }
 
     @PostMapping
-    public String postRegister(@RequestParam String email,
+    public String postRegister(@RequestParam String name,
+                               @RequestParam String surname,
+                               @RequestParam String email,
                                @RequestParam String password,
                                @RequestParam String repeatedPassword,
                                @RequestParam Roles role) {
-
         try {
-            this.userService.register(email, password, repeatedPassword, role);
-            return "redirect:/login";
+            this.userService.register(name, surname, email, password, repeatedPassword, role);
+            return "redirect:/";
         } catch (InvalidParameterException | BadCredentialsException e) {
-            return "redirect: /register?error=" + e.getMessage();
+            return "redirect:/register?error=" + e.getMessage();
         }
 
     }

@@ -56,6 +56,12 @@ public class User implements UserDetails {
         this.role = role;
     }
 
+    public User(String name, String surname, String email, String password, Roles role) {
+        this.email = email;
+        this.password = password;
+        this.role = role;
+    }
+
     private boolean isAccountNonExpired = true;
     private boolean isAccountNonLocked = true;
     private boolean isCredentialsNonExpired = true;
