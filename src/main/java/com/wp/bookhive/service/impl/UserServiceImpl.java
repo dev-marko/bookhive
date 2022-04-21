@@ -2,6 +2,7 @@ package com.wp.bookhive.service.impl;
 
 
 import com.wp.bookhive.models.entities.User;
+import com.wp.bookhive.models.enums.AuthenticationType;
 import com.wp.bookhive.models.enums.Roles;
 import com.wp.bookhive.models.exceptions.UserNotFoundException;
 import com.wp.bookhive.repository.UserRepository;
@@ -13,6 +14,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.security.InvalidParameterException;
 
 @Service
@@ -59,5 +61,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         return this.userRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException(email));
+    }
+
+    public void updateAuthenticationType(String username, String oauth2ClientName) {
+        AuthenticationType authType = AuthenticationType.valueOf(oauth2ClientName.toUpperCase());
+        userRepository.updateAuthenticationType(username, authType);
     }
 }

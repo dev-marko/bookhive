@@ -9,5 +9,5 @@ public interface UserService extends UserDetailsService {
     User findById(Integer id);
     User findByEmail(String email);
     User register(String name, String surname, String username, String password, String repeatPassword, Roles role);
-
+    void updateAuthenticationType(String username, String oauth2ClientName);
 }

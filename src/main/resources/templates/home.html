@@ -78,7 +78,8 @@
         </form>
         <br>
         <a href="/register" id="registerbtn" class="btn btn-dark btn-lg" type="submit">Register</a>
-        <a href="/springsocial" id="springsocialbtn" class="btn btn-dark btn-lg" type="submit">Spring Social</a>
+
+        <a th:href="@{/oauth2/authorization/google}" id="springsocialbtn" class="btn btn-dark btn-lg" type="submit">Google Login</a>
     </div>
     <div id="right">
         <h3 id="logo" class="text-center">Bookhive</h3>

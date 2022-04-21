@@ -1,0 +1,40 @@
+server:
+  servlet:
+    session:
+      cookie:
+        name: bookhive
+      timeout: 60m
+  port: '8080'
+
+spring:
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: 'true'
+  datasource:
+    username: postgres
+    url: jdbc:postgresql://localhost:5432/bookhivedb
+    hikari:
+      connectionTimeout: '20000'
+      maximumPoolSize: '5'
+    password: root
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQL95Dialect
+        jdbc:
+          lob:
+            non_contextual_creation: 'true'
+    hibernate:
+      ddl-auto: update
+    show-sql: 'true'
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            clientId: 143766129919-8cr0npp73emq9cop2entkcfqm73bit3i.apps.googleusercontent.com
+            clientSecret: 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
+            scope:
+              - email
+              - profile

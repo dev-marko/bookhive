@@ -1,10 +1,11 @@
 package com.wp.bookhive.web.controllers;
 
+import com.wp.bookhive.models.config.oauth2.CustomOAuth2User;
 import com.wp.bookhive.models.entities.Book;
 import com.wp.bookhive.models.entities.User;
 import com.wp.bookhive.models.entities.UserBook;
-import com.wp.bookhive.service.BookService;
 import com.wp.bookhive.service.UserBooksService;
+import com.wp.bookhive.service.UserService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -25,9 +26,11 @@ import java.util.List;
 public class UserBooksController {
 
     private final UserBooksService userBooksService;
+    private final UserService userService;
 
-    public UserBooksController(UserBooksService userBooksService) {
+    public UserBooksController(UserBooksService userBooksService, UserService userService) {
         this.userBooksService = userBooksService;
+        this.userService = userService;
     }
 
     // ### USER BOOKS ENDPOINTS START HERE ###
@@ -35,7 +38,12 @@ public class UserBooksController {
     @GetMapping("/my-books")
     public String getMyBooksPage(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User user = (User) auth.getPrincipal();
+        User user;
+        if(auth.getPrincipal() instanceof CustomOAuth2User customOAuth2User) {
+            user = userService.findByEmail(customOAuth2User.getEmail());
+        } else {
+            user = (User) auth.getPrincipal();
+        }
         List<UserBook> userBooks = this.userBooksService.getMyBooks(user.getId());
         model.addAttribute("userBooks", userBooks);
         model.addAttribute("bodyContent", "my-books");

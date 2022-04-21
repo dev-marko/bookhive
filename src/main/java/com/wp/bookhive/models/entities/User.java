@@ -1,5 +1,6 @@
 package com.wp.bookhive.models.entities;
 
+import com.wp.bookhive.models.enums.AuthenticationType;
 import com.wp.bookhive.models.enums.Roles;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,12 +11,12 @@ import javax.persistence.*;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 
 @Data
 @Entity
 @NoArgsConstructor
 @Table(name = "bookhive_user")
+//@DiscriminatorValue(value = "DB_USER")
 public class User implements UserDetails {
 
     @Id
@@ -50,7 +51,12 @@ public class User implements UserDetails {
     @ManyToMany(mappedBy = "members")
     private List<BookClub> bookClubs;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "auth_type")
+    private AuthenticationType authType;
+
     public User(String email, String password, Roles role) {
+        super();
         this.email = email;
         this.password = password;
         this.role = role;
