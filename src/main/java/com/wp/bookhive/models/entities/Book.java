@@ -26,7 +26,8 @@ public class Book {
     private String description;
     private LocalDate datePublished;
     private String coverImageUrl;
-    private Integer testCounter;
+
+    // TODO pri dodavanje na kniga da se dodade drop down list (so multiple select) od zhanrovi
 
     @ElementCollection
     private List<Genres> genres;
