@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{
+            background-color: #FC766A;
+            /*background-color: goldenrod;*/
+            /*background-color: #9ed9cc;*/
+            /*background-color: #008C76;*/
+            font-family: 'IBM Plex Sans', sans-serif;
+            font-size: 30px;
+        }
+        li{
+            font-family: 'Oswald', sans-serif;
+        }
+        h1{
+            font-family: 'Oswald', sans-serif;
+        }
+        #container{
+            display: flex;
+            justify-content: space-between;
+            width: 80%;
+            margin: 40px auto auto;
+        }
+        #middle{
+            width: 80%;
+            margin: 40px auto auto;
+        }
+        #books{
+            width: 80%;
+            margin: 40px auto auto;
+        }
+        .button{
+            background-color: #2f4f4f;
+            padding: 10px;
+            border-radius: 5px;
+            text-decoration: none;
+            color: white;
+            font-family: 'Oswald', sans-serif;
+        }
+        .button:hover{
+            color: lightgray;
+            background-color: #3f5f5f;
+        }
+
+    </style>
+</head>
+<body>
+<div id="container">
+    <div id="left">
+        <h1 th:text="${bookshop?.name}">The name of the bookshop</h1>
+        <h4 style="margin-bottom: 0; margin-top: 10px;" th:text="${bookshop?.city}">The city of the bookshop</h4>
+        <h4 style="margin-bottom: 0; margin-top: 10px;" th:text="${bookshop?.address}">The address of the bookshop</h4>
+        <h4 style="margin-bottom: 0; margin-top: 10px;" th:text="${bookshop?.bookshopEmail}">The email of the bookshop</h4>
+        <h4 style="margin-bottom: 0; margin-top: 10px;" th:text="${bookshop?.phoneNumber}">The phone number of the bookshop</h4>
+    </div>
+    <div id="right">
+<!--        <img alt="Image URL" id="avatar" th:src="${bookshop?.imageUrl}" height="500" width="500"/>-->
+        <img alt="Image URL" id="avatar" src="#" height="500" width="500"/>
+    </div>
+</div>
+
+<div id="middle"><p>Grade: </p><span th:text="${bookshop.grade}">The grade of the book</span><span th:text="${' By ' + bookshop.numGraders + ' graders.'}"></span></div>
+
+<div id="books" th:if="${bookshop.books.size()>0}">
+    <h2 style="text-align: center; margin-bottom: 0;">Books you can find in this bookshop:</h2>
+    <div style="display: flex; justify-content: center; margin-top: 0;">
+        <ul>
+            <li th:each="book : ${bookshop.books}" th:text="${book.name}"></li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

@@ -62,6 +62,7 @@ public class BookController {
         }
 
         model.addAttribute("bodyContent", "books");
+        model.addAttribute("books_selected", true);
 
         // TODO: Treba da stavam barem uste 2-3 knigi za da isprobam paginacijata
         // TODO: sredi na sekoja cetvrta kniga da se prefrla vo nov red.

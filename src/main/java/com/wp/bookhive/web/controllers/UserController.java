@@ -11,6 +11,7 @@ public class UserController {
     @GetMapping("/user")    //dali da se stavi @PathVariable za userId?
     public String getUserViewPage(Model model) {
         model.addAttribute("bodyContent", "test");
+        model.addAttribute("home_selected", true);
         return "index";
     }
 }

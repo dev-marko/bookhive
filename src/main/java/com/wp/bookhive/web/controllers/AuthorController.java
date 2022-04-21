@@ -20,6 +20,7 @@ public class AuthorController {
     public String getAllAuthors(Model model) {
         model.addAttribute("authors", this.authorRepository.findAll());
         model.addAttribute("bodyContent", "authors");
+        model.addAttribute("authors_selected", true);
         return "index";
     }
 

@@ -39,6 +39,7 @@ public class UserBooksController {
         List<UserBook> userBooks = this.userBooksService.getMyBooks(user.getId());
         model.addAttribute("userBooks", userBooks);
         model.addAttribute("bodyContent", "my-books");
+        model.addAttribute("mybooks_selected", true);
         return "index";
     }
 
@@ -75,6 +76,7 @@ public class UserBooksController {
         List<Book> userWishlist = this.userBooksService.getMyWishlist(user.getId());
         model.addAttribute("wishlist", userWishlist);
         model.addAttribute("bodyContent", "my-wishlist");
+        model.addAttribute("mywishlist_selected", true);
         return "index";
     }
 

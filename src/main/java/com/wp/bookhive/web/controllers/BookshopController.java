@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping("/bookshop")
+@RequestMapping("/bookshops")
 @Controller
 public class BookshopController {
 
@@ -22,21 +22,36 @@ public class BookshopController {
     public String test(Model model) {
         List<BookShop> bookshopList = this.bookshopService.getAllBookshops();
         model.addAttribute("bookshops", bookshopList);
-        return "bookshop";
+        return "bookshop_geolocation";
     }
 
     @GetMapping("/all")
     public String getAllBookshops(Model model) {
         List<BookShop> bookshopList = this.bookshopService.getAllBookshops();
         model.addAttribute("bookshops", bookshopList);
-        return ""; //sega za sega vaka neka stoi pa ke vidime otposle sto ke se vrakja i dali ke postoi ovaa metoda
+        model.addAttribute("bookshops_selected", true);
+        model.addAttribute("bodyContent", "bookshops");
+        return "index";
     }
+
+    @PostMapping("/search")
+    public String getAllBookshops(@RequestParam(required = false) String search, Model model) {
+        List<BookShop> bookshopList = null;
+        if(search!=null) bookshopList = this.bookshopService.searchBookshops(search);
+        else bookshopList = this.bookshopService.getAllBookshops();
+        model.addAttribute("bookshops", bookshopList);
+        model.addAttribute("bookshops_selected", true);
+        model.addAttribute("bodyContent", "bookshops");
+        return "index";
+    }
+
+
 
     @GetMapping("/{bookshopId}")
     public String getBookshop(@PathVariable Integer bookshopId, Model model) {
         BookShop bookshop = this.bookshopService.findById(bookshopId);
         model.addAttribute("bookshop", bookshop);
-        return ""; //sega za sega vaka neka stoi pa ke vidime otposle sto ke se vrakja i dali ke postoi ovaa metoda
+        return "bookshop_bio";
     }
 
     //plus site knigi

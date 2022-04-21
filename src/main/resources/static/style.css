@@ -220,3 +220,8 @@ a.article:hover {
 footer {
     background-color: #9ED9CC;
 }
+
+.selected{
+    color: #008C76;
+    background: #ddd;
+}

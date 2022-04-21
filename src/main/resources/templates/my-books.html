@@ -31,10 +31,10 @@
                             <h5 class="card-title" th:text="${userBook.getBook().getName()}" style="font-weight: bold"></h5>
                             <p class="card-text" th:text="${userBook.getBook().getDescription()}">
                             </p>
-                            <p class="card-text">
+                            <p class="card-text">Author/s:
                                 <small class="text-muted"
                                        th:each="author : ${userBook.getBook().getAuthors()}"
-                                       th:text="${'author: ' + author.getName() + ' ' + author.getSurname()}"></small>
+                                       th:text="${author.getName() + ' ' + author.getSurname() + ', '}"></small>
                             </p>
                             <p class="card-text">
                                 last page read: <b th:text="${userBook.getLastPageRead()}"></b>

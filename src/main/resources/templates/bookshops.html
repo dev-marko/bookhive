@@ -1,62 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Bookshops</title>
-    <link rel="stylesheet" href="bookshop_style.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-</head>
-<body style="background-color: #9ED9CC;">
-    <div class="container" id="searchCont">
-        <form class="example">
-            <input type="text" placeholder="Внесете име на книжарница.." name="search">
-            <button type="submit"><i class="fa fa-search"></i>Search</button>
+<!--    <link rel="stylesheet" href="/bookshops_style.css">-->
+    <div class="w-50 my-4 mx-auto" id="searchCont">
+        <form method="post" action="/bookshops/search">
+            <input type="text" class="form-control" placeholder="Внесете име на книжарница.." name="search">
+            <button class="btn btn-dark w-100" type="submit"><i class="fa fa-search"></i>Search</button>
         </form>
     </div>
     <div class="container" id="c2">
-        <div class="row">
-            <div class="card mb-3 mx-auto" style="max-width: 540px;">
-                <div class="row g-0">
-                    <div class="col-md-4">
+        <div th:each="bookshop : ${bookshops}" class="row">
+            <div class="card mb-3 mx-auto" style="max-width: 540px; ">
+                <div class="row">
+                    <div class="col-md-4 d-flex align-items-center">
                         <img
                                 src="https://skopjecitymall.mk/wp-content/uploads/2017/09/prosvetno-delo.fw_.png"
-                                alt="prosvetno delo"
-                                class="img-fluid rounded-start"
+                                alt="Bookshop_Image"
+                                class="h-75 img-fluid rounded-circle ms-3"
                         />
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
-                            <h5 class="card-title">Просветно дело</h5>
-                            <p class="card-text">Ул. Димитрие Чуповски 15</p>
-                            <p class="card-text">+389 (0) 2 3117 255</p>
-                            <p class="card-text">goran.dukoski@yahoo.com</p>
+                            <h5 class="card-title" th:text="${bookshop.name}">Просветно дело</h5>
+                            <p class="card-text" th:text="${bookshop.address}">Ул. Димитрие Чуповски 15</p>
+                            <p class="card-text" th:text="${bookshop.phoneNumber}">+389 (0) 2 3117 255</p>
+                            <p class="card-text" th:text="${bookshop.bookshopEmail}">goran.dukoski@yahoo.com</p>
                             <p class="card-text">
-                                <a href="https://www.prosvetnodelo.com.mk/" class="link-info">Линк кон веб страна</a>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-        <div class="row">
-            <div class="card mb-3  mx-auto" style="max-width: 540px;">
-                <div class="row g-0">
-                    <div class="col-md-4">
-                        <img
-                                src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBw8QDw8NDQ8PDQ0NDg0QDw8QDQ8NEBAPFREWFhgRFRMYHSogGBomHR8TITEhJTUtLi4uFx8zODMsNygtLisBCgoKDg0OGxAQGisgHyUvLi4tLS0vLS0rLS0rLy0rLS0tLS0tLS0tLS0tLS0tLS0tLS0tKy0tLS0tLS0tLS0tLf/AABEIAOEA4QMBEQACEQEDEQH/xAAbAAEBAAIDAQAAAAAAAAAAAAABAAIFAwQHBv/EAEQQAAIBAwEEBQYKBwkBAAAAAAABAgMEEQUGEiExE0FRYXEHFBYikcEycoGSoaKxwtLwI0JDYoOy0RUkNERSVHOCkzP/xAAaAQEAAwEBAQAAAAAAAAAAAAAAAQIDBAUG/8QALREBAAIBAwMDAgYCAwAAAAAAAAECEQMEIQUSEzFBYSJRFBVCUnGBMuGRobH/2gAMAwEAAhEDEQA/APXwIBAQFAWAFIDICAgECAsAQEBYAgIAAgIDHAE0BiBAQAAAQEAgICApAICBAIEAgQEAgQBgCwBAAEAAQAwBoAAAIDECAQECAyQCAgQDgBAgECAgICAgICAgAAAgAAwBNAYsAAAIBAUApAZASAQECAQICAQICAgICYABAQEAADAAIAYGLAAIBAUgEBAUAgIEBAIEAgQEBAQEwACAAICAGAAAEBiwAAAUBkAgICgECAQIBAgEBwBYAsAWABoAAgIAAAIAAABgGAMQIBSAyAgMgECAQFAIEkAgQCBAQEAAQBgCaAAAAAgAAYAAMAAyAgFAZAQCAgQDgBAQICAgICAgIAAmAAAAwAAAGAAAFgBAQFAIEAgZASAQECAQICAgICAgAAAsAYgDAgAAYAwAAAQFAICAgICkAgIEAoCAQICAgIAAgACAGBiwAAAmBiAAAGQCgECAUAgZAIEAgIEBAQOEEZhZIylE5EADg5QAAE4R3QGhhIIRz9gOUxzAByAAAAQFAICAoBAQFAIEAthOBvIHaHNLm0DtmXBUvqMfhVYR8ZxQmcLxpX9odeWt2i53ND/2h/UjuWjQ1J/S4Z7S2K53VH56f2Ed9WkbHXn9EuvLbDTl/mqb8N5+4idSq8dN3H7Jdept3py/bt/FpVJe4jyVXjpm4n9Dgl5QrDqlVl4UZL7cDy1Xjo+4l16nlJs1ypXMu9Qpr7ZjzUhpHRNeXDLyl2/6tvXfj0S+8R56tY6FrOCflNj1Wk341Yrj7CPOvHQ9T90OCflMl+rar5av9EVnXax0G3vZwT8pVfqtqS/7zZHnaR0H73cE/KLdvlToL5JSInXtlp+RaWInL7XY7Ua9zaqvcqClOc93ci4rcTx1t95vSZn1eD1DQpoa00pOcN2XcIAAFAKHse0y6Gv6i7a3qXEYdJ0aT3c7vDOOZWb9tW+10fLNaT7vh5+Uqr1WtNeNWT4fNMvO92vQp95cE/KRdP4NGhH43SS96K/iJhrHQaeuXBLyiX7/AFbZeFKp+MideWkdB0YjMTy4Z7e6i/2lOPhSXvbHmsvHQ9Fwz211F/t8eFOC9xE61mlejaFfWMuGe1uoP/NVF4bq9xHls1jpO3/Y4Km0V9LndVvn4+wjy2Xjpu3j9Drz1W5fO4rv+PU/qROrb3W/A6EfpcM7urL4VWpLxqTfDs5keSWtdvox7OBxT4tJvtayyO5pGnRbq7F7B3J8dfY4GTshELICAgICCUJnCvxCCZnt4lBKJj1Z2nET8PctnrPobS3ovnClBS+M4pyftbO6scPgN3qd+ra3y2BZzgAAQMicHrw120dDpLO5hz3qNTC71HJW8ZjDo2t+zXrP2eIUYb0oxzjflGOezLxk4ax9WH3upqWjS7n0232mUbapbwowjBOg3JxWN6W8ll9ptq1iMPI6XuL6s37p59nS1K8sZWNClRpKN5Do+mqdHu72ISUvW6+LRWcTX0abfR3NdxNrz9P2Y3Wz8qdjS1CVVNVpxiqW5yT3sS397u5Y6yPHPblavU6zr+LH95aUy5etaMTxPH3WfYTicZViYmfVMfUT91n85QxK0zFfdfnkMHdExxOW5p6BJ6fPU3UShCooKnuZ3l0kae9v73Di3ww+Xea+L6cvKnqMRuPD2/3lpsoxxL1ZmI903+c8BiUZxGZQ5Mws/ngyYiSs5r3SsrtXtExMI76T7oYWn0iVnvXX19QwrN6xPqsj3IvEpP8APIjE92E4nHdD6vaLR6VPTdPuqcFCpVhTVWSz67nSTy+/K+k6L0jEPC2e5tfd307z/H9PlMmGJe5S3d6NhoFr013b0f8AXVhnwXrP6Ey2nXNnNvtXx6N7fD3NHd8PgI5jIAAABAyQGM4ppp8U00/ALUjE9zwe3pOFeEHzp14RfjGpj3HDH+b7ybd23n+H1vlSf6e2/wCCX8xvrezyeicd7m1SjRpaTp1x0MHPftZTajHemujk3FvvLTXFHNpX1NTd3p3/AHb3UdcoQ063upWsZ0qrgo0G4qMG0+OcY6u4ta0drgpoalteaRPLS7FafRqwvL7zeNar0tV29F43Y85KCzwTy0s9xXTrGJl39R1tWk105tiMcu5tFpka2nVrm4tIWd1QzKO403up9q5p9j7BemastpuLaW4rXTt3RIjUtLTTrS9qWkK9WUIQz6sW3JNtttdwzFIWmuvr7q+jSzRbN3cp17qrR0+N10tXegnGMY0Itt7ucY5OPDuM9OYmZdm90+zTpS+piY/7bjbTSYT09XkraNndRa3oRceTnuYe7waaxJdnA01KRhw9P3OpTW7InMNrHXqH9kyvPNY9ApKLt8xw306hnOMc+PyFu6O1zTttSd12d31NJsQqF1X1Gq6EFDdoThTlGMlBtVOC9iM9PE5l6PUPJoRp1m3Pu4PJtaUq1a86SnCcYxpuKlFNRzKfImkRKep6t6Upi3qy8n1rbysrmtXowrOjNTW8ln1acZYyRpRGFeo6mtGrWM47munrELq9o1aNhGajTcfNkovffF73Lq4c+wrNo7nTO2vobeYvqPsaemxu6FWF5YQs3GOacouDfXhrd4prhwfDibRXMPJjcX0NWPFfOXkkXwT8Din1fZ0t9ERL0fSoWtDSKV7WtqdxOnlpOMcuXSNLi0dMdsVzL5Tc21dTdTp1th2a15ZSsIavOxg5JuCprHwuldPnyays8VwLZp2dzGtdbzeHua/aWFvdaYtQhbxoVYygvVSTw6m44trmuOfkItETTudOznU0dz47WzDbR0Tz3TdMpSlu0407edTtcVRxiPe219Jete6sS5rbqdvub3r65l8hthqdCU/NbOlCFGjLEqiglKpOPDCfPC+kw1LRPEPa6ZoanbGtq24s7Hkzs9+8lVa4UKUmvjSeF9G8NCPqZ9d1eykV+71U6p9XynpwAgAACgFBBC0PFNepqlqNZPhGNypt928pt/Scloxd9rtJ8mziI+z7DbzSVc04XtOtTUKFtJ7r5zwt5brNdSsWw8bYbi+ha2nMesultDNf2JYx3k2pW2VlZX6KYvMdjXYUn8bOY+7vUtO890e1pUqsIOk4Obk+Ed3eyvHiTERfTwwvedDeWtavu4dgqv8Ad72yhWjRulOqqcs5w3HdU124a6veRp5xiJX6p3W1K6s14dXaLT9SpWtWV1fqrBtJ0lJevFyx3ePAia3+7TZX219Wvbp4lltHUi9FsUmnJOlwz+6xqTmmFtpS8b67ubGylU0urb2lSFK8Up8W91ptpp/LHhniTp47MOfqVJrue68Zhz7QRqU9GnRua8a91GS35KW9nNZtL5Fj2E3x2YZ7Svdu4tWuIdXZ+0870SdpTqQjUdVv1nwjiuqnHHchSItp4abm9tHeRqxVweT9wt7q+tKlSO9NRhCSa3Z7jny8VKLxzK6URGYdHVJtrUpqxX+W42O0GVhO4lcVqT6dRUFGWG91ybeH4o0isQ8/d7idxFYrX0aTYKtGOmXybSct/Hf+hRlT/B3b+lp3FJw6/kwr043FaM5RjOdKKpt9eG8pfV4dw0scujrVbWpWYjMe76/Q6F1Rdz5/dQqqrnoo76eIre5LCx1dvI2jh4upNbzXx1xh5ppWhOtZ17zpYQ82Uv0bWZTcYKXDj34+Q5YpGH02pvp0dSun25z7vqJzXo8o7y3ljhnj/wDXsNZx48PLik/mHo4ZzXo7CO8t7pn6ueP+LkOPFhMUn8w9OP8ARqVI+j27vLe6SPDPH/EomJjx4IpMdQnjj/TaVNbdrp2l1YyTju20a0et03R48O1c/FFoviIhyW206241K4+7Q7f6VTU431vJSpXOHNJpqM2uE8dWft8TLVrHrD0+k7m0V8Nq+jf+S20cbarWax01XEfiQS97l7C+jH0vN63qd+pFfs+1No9HjSABgACAoBA8z202bu6t7Orb0JVadSNN70ZQXrJYa4vnwRz62naZzD6XpnUNLS0sXlpfRTUuXm1XC6t+nj2bxn47uv8AH7PPdHqPRLUuXmtRrs6Snj+bxHivjDSOq7aJzE8pbJ6nhpW1RJ5ylUp4f1ifHdWepbS091uZS2S1LqtJrwnSX3h47F+qba0YmTLZPUnztar/AIlP8QnStJXqW0rjGP8AgPZLUuXmtX59P8Q8dlo6ptYmZzzJjslqS5WtVeE6S+8TGneJVv1LZ3jFuV6Jalx/utTjz9elx8fWInTvKfzTa8Ynj+FHZPUlytaqz2TpL2+txJ8d1b9S2l5zP/iWyOpdVrU7c79Ln2/CHjutPVdtMYzwXspqfXbVW11upTf3hNLyrHUNlWPpxDH0R1LkrWpx/fp/iHjtjC09T2kzmUtkdS6rSouz16XD6xHium3VdraMSXsnqb4u2qt99Sm/vEzp3Z16hs4j2XonqX+1qfPp8frERp2iMNPzXbYwPRLUuXmtTHx6f4h47Ijqm1ic55XolqXLzWpjs6Snj2bw8dkx1Tbd3dnleiWpcvNamOzpKePZvDx2yiOq7bum2eV6Jal/tKmPj0/xE9livVdtWc55XonqWMea1MdnSU8fzEeO3uiOp7WP8XqezVg7e0oUZLEoQW8uXrvi8/Lk6a1xGHy271fJqzqfdtCzlgBIYAAgKAQJDkzaeMMkxmU+nGDkjlGfgjkz8FDlOfhYHJn4JPKEORDkI5EORDkA5FgciwOU5Q5M/AHJn4RHKM/AHKc/AyOTPwGOTPwCUTGQAMDECAgFAZAQCgEBQCAgIEAgQEBAQEAAQAAATYGLAAACYGIAAAICgEBAkBkApgKAgEBAgIBAAICAAIAAsgAAwAAAGAAAAAgSAQMgIBAQEBQCBAQCBAQEAAQABMAAAAAAgBgAGIEAIDIBAQECAQECAyyBAQEBAQEBAWQJsAAAAAAgAAYAANgAEmAoBAQFAIEAoCAQFMByBZAsgWQLIFkAAAJgAABAAAAMCAxAAADJMBQCAoBAQIBAgFAQEBAQEBZAgACYABAAEBiBAYtgAABAKAyTAQIBAQJAIEAgQFkCAgICAgACAgAAAAAAbAAACAgIBAyyAgQCBIBAQICAgICAgICAgBgQAAMCAxbAGAAAEBAIEAoByAoBAgHIEAoCAgICAgICyAATAgACAxbAAACAAACAgEBAQIDLIEAgQCgICAgICAsgAEBAAE2AAAAAAQABAQEAgIEAgICgICAUBAQEBAQEBAAEBAAAwACAAACAgP/Z"
-                                alt="uncle vanya"
-                                class="img-fluid rounded-start"
-                        />
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h5 class="card-title">Литература мк</h5>
-                            <p class="card-text">Скопје сити мол</p>
-                            <p class="card-text">078 475 291</p>
-                            <p class="card-text">info@literatura.mk</p>
-                            <p class="card-text">
-                                <a href="https://www.literatura.mk/" class="link-info">Линк кон веб страна</a>
+                                <a th:href="${bookshop.webSiteLink}" class="link-info" style="text-decoration: none;color: black !important;">Линк кон веб страна</a>
                             </p>
                         </div>
                     </div>
@@ -65,7 +32,3 @@
             </div>
         </div>
     </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-</body>
-</html>

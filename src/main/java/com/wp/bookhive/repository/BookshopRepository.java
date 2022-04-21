@@ -10,4 +10,6 @@ import java.util.List;
 @Repository
 public interface BookshopRepository extends JpaRepository<BookShop,Integer> {
     List<BookShop> getAllByBooks(Book book);
+    List<BookShop> findAllByNameContainingIgnoreCase(String containing);
+
 }

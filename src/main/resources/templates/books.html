@@ -5,20 +5,20 @@
                 Add Book
             </a>
         </div>
-        <div class="row my-5 align-items-center justify-content-center">
+        <div class="row my-5 justify-content-center">
             <div th:each="book : ${books.getContent()}"
                  class="col-5 col-lg-4 col-xl-3">
                 <div class="card shadow border-0 w-100 h-100">
                     <div class="card-body text-center py-4">
-                        <img class="card-img w-50"
+                        <img class="card-img w-100"
                              th:src="${book.getCoverImageUrl()}"
                              alt="crime and punishment" style="height: 200px;"/>
-                        <h5 class="card-title mt-1 mb-0" th:text="${book.getName()}">
+                        <h5 class="card-title mt-3 mb-0" th:text="${book.getName()}">
                             <!--Злосторство и казна-->
                         </h5>
                         <p class="card-subtitle fs-6 fst-italic mt-0 mb-3">
                         <span th:each="author : ${book.getAuthors()}"
-                              th:text="${author.getName() + ' ' + author.getSurname()}"></span>
+                              th:text="${author.getName() + ' ' + author.getSurname() + ', '}"></span>
                             <!--автор: Фјодор Достоевски-->
                             <!-- ke ni treba BookDto za books.html stranava-->
                         </p>
@@ -43,7 +43,7 @@
                             <div class="d-inline-block p-0">
                                 <form th:method="POST"
                                       th:action="@{'/my-books/add/{id}' (id=${book.getId()})}">
-                                    <button type="submit" class="btn btn-sm text-white mt-3"
+                                    <button type="submit" class="btn btn-sm text-white mt-1"
                                             style="background-color: #008C76;">
                                         My Books
                                     </button>

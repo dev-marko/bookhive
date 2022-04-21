@@ -25,6 +25,12 @@ public class BookshopServiceImpl implements BookshopService {
     }
 
     @Override
+    public List<BookShop> searchBookshops(String search) {
+        return this.bookshopRepository.findAllByNameContainingIgnoreCase(search);
+    }
+
+
+    @Override
     public BookShop findById(Integer bookshopId) {
         return this.bookshopRepository.findById(bookshopId).orElseThrow(() -> new BookshopNotFoundException(bookshopId));
     }
