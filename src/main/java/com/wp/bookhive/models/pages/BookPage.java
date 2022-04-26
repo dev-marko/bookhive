@@ -8,7 +8,7 @@ import org.springframework.data.domain.Sort;
 @NoArgsConstructor
 public class BookPage {
     private Integer currentPage = 0;
-    private Integer pageSize = 9;   // change it to 10 when you're done testing
+    private Integer pageSize = 8;
     private Sort.Direction sortDirection = Sort.Direction.ASC;
     private String sortBy = "name";
 }

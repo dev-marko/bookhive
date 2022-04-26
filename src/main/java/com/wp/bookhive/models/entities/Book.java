@@ -27,7 +27,6 @@ public class Book {
     private LocalDate datePublished;
     private String coverImageUrl;
 
-    // TODO pri dodavanje na kniga da se dodade drop down list (so multiple select) od zhanrovi
 
     @ElementCollection
     private List<Genres> genres;
@@ -38,12 +37,13 @@ public class Book {
     @OneToMany(mappedBy = "book")
     private List<UserBook> userBooks;
 
-    public Book(String isbn, String name, String description, LocalDate datePublished, List<Author> authors) {
+    public Book(String isbn, String name, String description, LocalDate datePublished, List<Author> authors, List<Genres> genres) {
         this.isbn = isbn;
         this.name = name;
         this.description = description;
         this.datePublished = datePublished;
         this.authors = authors;
+        this.genres = genres;
     }
 
     //    private Double price;

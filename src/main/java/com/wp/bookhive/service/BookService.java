@@ -1,6 +1,7 @@
 package com.wp.bookhive.service;
 
 import com.wp.bookhive.models.entities.Book;
+import com.wp.bookhive.models.enums.Genres;
 import com.wp.bookhive.models.pages.BookPage;
 import org.springframework.data.domain.Page;
 
@@ -12,8 +13,7 @@ public interface BookService {
     Page<Book> findByPage(BookPage bookPage);
     Book findById(Integer id);
     Book findByIsbn(String isbn);
-    Book add(String isbn, String name, String description, LocalDate datePublished, List<Integer> authorIds);
-    Book edit(Integer id, String isbn, String name, String description, LocalDate datePublished, List<Integer> authorIds);
-    Book editLastPage(Integer id, Integer lastPage);
+    Book add(String isbn, String name, String description, LocalDate datePublished, List<Integer> authorIds, List<Genres> genres);
+    Book edit(Integer id, String isbn, String name, String description, LocalDate datePublished, List<Integer> authorIds, List<Genres> genres);
     void deleteById(Integer id);
 }

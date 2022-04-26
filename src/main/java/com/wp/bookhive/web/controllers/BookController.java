@@ -2,6 +2,7 @@ package com.wp.bookhive.web.controllers;
 
 
 import com.wp.bookhive.models.entities.Book;
+import com.wp.bookhive.models.enums.Genres;
 import com.wp.bookhive.models.pages.BookPage;
 import com.wp.bookhive.repository.BookshopRepository;
 import com.wp.bookhive.service.AuthorService;
@@ -44,7 +45,7 @@ public class BookController {
                               Model model) {
 
         int currentPage = page.orElse(0);
-        int pageSize = size.orElse(9);
+        int pageSize = size.orElse(8);
 
         BookPage bookPage = new BookPage();
         bookPage.setCurrentPage(currentPage);
@@ -54,7 +55,7 @@ public class BookController {
         model.addAttribute("books", bookPageToDisplay);
 
         int totalPages = bookPageToDisplay.getTotalPages();
-        if (totalPages > 0) {
+        if (totalPages > 1) {
             List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
                     .boxed()
                     .collect(Collectors.toList());
@@ -73,6 +74,7 @@ public class BookController {
     @GetMapping("/form")
     public String getAddBook(Model model){
         model.addAttribute("authors", this.authorService.findAll());
+        model.addAttribute("genres", Genres.values());
         return "book";
     }
 
@@ -83,12 +85,15 @@ public class BookController {
             @RequestParam String description,
             @RequestParam String isbn,
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate datePublished,
-            @RequestParam List<Integer> authors) {
+            @RequestParam List<Integer> authors,
+            @RequestParam List<Genres> genres
+
+    ){
 
         if (id != null) {
-            this.bookService.edit(id, isbn, name, description, datePublished, authors);
+            this.bookService.edit(id, isbn, name, description, datePublished, authors, genres);
         } else {
-            this.bookService.add(isbn, name, description, datePublished, authors);
+            this.bookService.add(isbn, name, description, datePublished, authors, genres);
         }
 
         return "redirect:/books";
@@ -98,6 +103,7 @@ public class BookController {
     public String getEditBook(@PathVariable Integer id, Model model) throws Exception {
         model.addAttribute("book", this.bookService.findById(id));
         model.addAttribute("authors", this.authorService.findAll());
+        model.addAttribute("genres", Genres.values());
         return "book";
     }
     @GetMapping("/{id}/view")

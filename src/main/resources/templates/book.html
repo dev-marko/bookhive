@@ -60,10 +60,18 @@
                     th:text="${author.name} + ' ' + ${author.surname}" th:value="${author.id}"> [author.name]
             </option>
         </select>
-        <div style="display: flex;">
-            <button class="btn btn-dark btn-lg m-2" type="submit">Save book</button>
-            <button class="btn btn-dark btn-lg m-2" type="reset">Clear</button>
-            <a th:href="@{/books}" class="btn btn-dark btn-lg m-2">Back</a>
+        <div>
+            <h4>Select the genre/s of the book</h4>
+            <select class="form-control" name="genres" multiple required>
+                <option th:selected="${book?.genres?.contains(genre)}" th:each="genre : ${genres}"
+                        th:text="${genre}" th:value="${genre}"> [genre]
+                </option>
+            </select>
+        </div>
+        <div style="display: flex; align-items: stretch;">
+            <button style="flex: 1;" class="btn btn-dark btn-lg m-2" type="submit">Save book</button>
+            <button style="flex: 1;" class="btn btn-dark btn-lg m-2" type="reset">Clear</button>
+            <a style="flex: 1;" th:href="@{/books}" class="btn btn-dark btn-lg m-2">Back</a>
         </div>
     </form>
 </div>

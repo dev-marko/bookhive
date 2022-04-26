@@ -59,42 +59,36 @@ var bookicon = L.icon({
     selectedStoreName = "Македоника Литера 1"
     geolocation();
 });
-
     let marker9 = L.marker([41.9929199,21.4740172], {icon: bookicon}).addTo(map);
     marker9.on('click', () => {
         selectedStore = marker9;
         selectedStoreName = "Мартина 1"
         geolocation();
     });
-
     let marker10 = L.marker([41.9930174,21.4098921], {icon: bookicon}).addTo(map);
     marker10.on('click', () => {
         selectedStore = marker10;
         selectedStoreName = "Просветно Дело АД Скопје 1"
         geolocation();
     });
-
     let marker11 = L.marker([42.0022287,21.4583354], {icon: bookicon}).addTo(map);
     marker11.on('click', () => {
         selectedStore = marker11;
         selectedStoreName = "Сакам книги 1"
         geolocation();
     });
-
     let marker12 = L.marker([41.9885200,21.4250843], {icon: bookicon}).addTo(map);
     marker12.on('click', () => {
         selectedStore = marker12;
         selectedStoreName = "Топер 1"
         geolocation();
     });
-
     let marker13 = L.marker([42.0016016,21.4518169], {icon: bookicon}).addTo(map);
     marker13.on('click', () => {
         selectedStore = marker13;
         selectedStoreName = "Топер 2"
         geolocation();
     });
-
     let marker14 = L.marker([41.7598776,22.1659847], {icon: bookicon}).addTo(map);
     marker14.on('click', () => {
         selectedStore = marker14;
@@ -131,4 +125,22 @@ var bookicon = L.icon({
     document.getElementById("information").hidden = false;
     document.getElementById("distance").innerHTML = "Растојанието од вас до книжара "+selectedStoreName+" изнесува <strong>" + (distance / 1000).toFixed(1) + " километри</strong>."
     document.getElementById("duration").innerHTML = "Времето за да стигнете до книжара "+selectedStoreName+" со автомобил изнесува <strong>" + (duration / 60).toFixed(0) + " минути</strong>."
-}
+    }
+
+
+
+//TODO
+//async function loadBookshops(){
+//     const url = "rest/bookshops/all";
+//     let items = await fetch(url);
+//     let parsed = await items.json();
+//
+//     for(let item of parsed){
+//         let marker = L.marker([item.latitude, item.longitude], {icon: uniicon}).addTo(markerLayer).bindPopup("<h3>"+item.name+"</h3><br><a style='width: 290px' class='btn btn-outline-dark' href=/home/" + item.id + ">Детален поглед</a>");
+//         marker.on('click', () => {
+//             selectedUniversity = marker;
+//             selectedStoreName = item.name
+//         });
+//     }
+// }
+// loadBookshops();

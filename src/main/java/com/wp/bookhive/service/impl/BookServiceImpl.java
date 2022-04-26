@@ -2,6 +2,7 @@ package com.wp.bookhive.service.impl;
 
 import com.wp.bookhive.models.entities.Author;
 import com.wp.bookhive.models.entities.Book;
+import com.wp.bookhive.models.enums.Genres;
 import com.wp.bookhive.models.exceptions.BookNotFoundException;
 import com.wp.bookhive.models.pages.BookPage;
 import com.wp.bookhive.repository.AuthorRepository;
@@ -54,31 +55,26 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Book add(String isbn, String name, String description, LocalDate datePublished, List<Integer> authorIds) {
+    public Book add(String isbn, String name, String description, LocalDate datePublished, List<Integer> authorIds, List<Genres> genres) {
         List<Author> authors = this.authorRepository.findAllById(authorIds);
-        return this.bookRepository.save(new Book(isbn, name, description, datePublished, authors));
+        return this.bookRepository.save(new Book(isbn, name, description, datePublished, authors, genres));
     }
 
     @Override
-    public Book edit(Integer id, String isbn, String name, String description, LocalDate datePublished, List<Integer> authorIds) {
+    public Book edit(Integer id, String isbn, String name, String description, LocalDate datePublished, List<Integer> authorIds, List<Genres> genres) {
         Book book = this.findById(id);
 
         book.setIsbn(isbn);
         book.setName(name);
         book.setDescription(description);
         book.setDatePublished(datePublished);
+        book.setGenres(genres);
         List<Author> authors = this.authorRepository.findAllById(authorIds);
         book.setAuthors(authors);
 
         return this.bookRepository.save(book);
     }
 
-    @Override
-    public Book editLastPage(Integer id, Integer lastPage) {
-        Book book = this.findById(id);
-        book.setTestCounter(lastPage);
-        return this.bookRepository.save(book);
-    }
 
     @Override
     public void deleteById(Integer id) {

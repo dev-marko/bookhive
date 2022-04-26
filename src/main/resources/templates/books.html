@@ -1,4 +1,18 @@
 <th:block xmlns:th="http://www.thymeleaf.org">
+    <style>
+        .page-link{
+            color: #174a45;
+        }
+        .page-link:hover{
+            color: lawngreen;
+        }
+        .activelink{
+            /*background-color: #008C76;*/
+            background-color: #174a45;
+            /*background-color: gray;*/
+            color:white;
+        }
+    </style>
     <div class="container-lg">
         <div class="row col-lg-2 my-5 align-items-start justify-content-start">
             <a th:href="@{/books/form}" class="btn text-white" style="background-color: #008C76;">
@@ -7,7 +21,7 @@
         </div>
         <div class="row my-5 justify-content-center">
             <div th:each="book : ${books.getContent()}"
-                 class="col-5 col-lg-4 col-xl-3">
+                 class="col-5 col-lg-4 col-xl-3 mb-4">
                 <div class="card shadow border-0 w-100 h-100">
                     <div class="card-body text-center py-4">
                         <img class="card-img w-100"
@@ -54,14 +68,19 @@
                 </div>
             </div>
         </div>
+
+
+
         <div class="row col-lg-2 my-5 align-items-start justify-content-start">
         </div>
         <nav class="row my-5 align-items-center justify-content-center" aria-label="Page navigation example">
-            <ul class="pagination align-items-center justify-content-center">
-                <li th:if="${books.totalPages}" th:each="pageNumber : ${pageNumbers}" class="page-item">
-                    <a class="page-link"
-                       th:href="@{/books(size=${books.size}, page=${pageNumber})}"
-                       th:text="${pageNumber}" th:class="${pageNumber==books.number + 1} ? active"></a>
+            <ul class="pagination pagination-lg align-items-center justify-content-center">
+                <li th:if="${books.totalPages}"
+                    th:each="pageNumber : ${pageNumbers}"
+                    class="page-item">
+                    <a th:class="${pageNumber==books.number + 1} ? 'page-link activelink' : 'page-link'"
+                       th:href="@{/books(size=${books.size}, page=${pageNumber-1})}"
+                       th:text="${pageNumber}" ></a>
                 </li>
             </ul>
         </nav>
