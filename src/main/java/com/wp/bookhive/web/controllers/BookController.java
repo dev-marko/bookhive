@@ -9,6 +9,7 @@ import com.wp.bookhive.service.AuthorService;
 import com.wp.bookhive.service.BookService;
 import org.springframework.data.domain.Page;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -19,11 +20,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-/*
-24.03.2022
-promeniv RequestMapping od /addbook vo /books
-Treba i za Edit da se smeni vo /edit/{id}
- */
+
 
 @Controller
 @RequestMapping("/books")
@@ -65,9 +62,6 @@ public class BookController {
         model.addAttribute("bodyContent", "books");
         model.addAttribute("books_selected", true);
 
-        // TODO: Treba da stavam barem uste 2-3 knigi za da isprobam paginacijata
-        // TODO: sredi na sekoja cetvrta kniga da se prefrla vo nov red.
-
         return "index";
     }
 
@@ -98,8 +92,8 @@ public class BookController {
 
         return "redirect:/books";
     }
-
-    @GetMapping("/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @GetMapping("/{id}/edit")
     public String getEditBook(@PathVariable Integer id, Model model) throws Exception {
         model.addAttribute("book", this.bookService.findById(id));
         model.addAttribute("authors", this.authorService.findAll());
@@ -114,7 +108,7 @@ public class BookController {
         model.addAttribute("bookshops", this.bookshopRepository.getAllByBooks(book));
         return "book_bio";
     }
-
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/{id}/delete")
     public String deleteBook(@PathVariable Integer id){
         this.bookService.deleteById(id);

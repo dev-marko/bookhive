@@ -75,7 +75,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .exceptionHandling().accessDeniedPage("/access-denied"); //"403"
 
                 http.csrf().disable().authorizeRequests()
-                .antMatchers("/home","/register", "/**.jpg", "/**.png", "/oauth2/**").permitAll()
+                .antMatchers("/home","/register", "/**.jpg", "/**.png", "/**.css", "/oauth2/**", "/books", "/authors", "/bookshops/all", "/bookshops/search").permitAll()
                 .anyRequest().authenticated()
                 .and()
                     .formLogin().loginPage("/home")
