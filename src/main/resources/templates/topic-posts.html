@@ -1,0 +1,39 @@
+<th:block xmlns:th="http://www.thymeleaf.org">
+    <div class="container">
+        <header class="row">
+            <div class="col-lg-12 mb-3 p-3">
+                <h5 th:text="${topic.getTitle()}"></h5>
+                <small class="me-3">Created by: <span th:text="${topic.getUser().getEmail()}"></span></small>
+                <small>Date created: <span th:text="${topic.getDateCreated().toString()}"></span></small>
+            </div>
+        </header>
+
+        <hr/>
+
+        <section class="row my-4 card shadow-sm" th:each="post : ${posts}">
+            <div class="card-body">
+                <div class="text-muted">
+                    <p>
+                        Posted by: <span
+                            th:text="${post.getUser().getName()} + ' ' + ${post.getUser().getSurname()}"
+                            class="pe-3"></span>
+                        Date posted: <span th:text="${post.getDateCreated().toString()}"></span>
+                    </p>
+                </div>
+                <hr/>
+                <p class="card-text" th:text="${post.getContent()}">
+                </p>
+            </div>
+        </section>
+
+        <section class="row">
+            <form class="w-100" th:method="POST" th:action="@{'/topic/{id}/add-post' (id=${topic.getId()})}">
+                <div class="mb-3">
+                    <label class="form-label">Write a new post</label>
+                    <textarea class="form-control" rows="8" name="content"></textarea>
+                </div>
+                <button type="submit" class="btn text-white float-end" style="background-color: #008C76;">Post</button>
+            </form>
+        </section>
+    </div>
+</th:block>

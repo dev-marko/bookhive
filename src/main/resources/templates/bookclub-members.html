@@ -1,0 +1,33 @@
+<th:block xmlns:th="http://www.thymeleaf.org">
+    <div class="container">
+        <div>
+            <h3></h3>
+        </div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Surname</th>
+                <th scope="col">E-mail</th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="member : ${members}">
+                <td th:text="${member.getName()}"></td>
+                <td th:text="${member.getSurname()}"></td>
+                <td th:text="${member.getEmail()}"></td>
+                <td>
+                    <form th:if="${bookclub.getOwner().getId() == loggedIn.getId()}"
+                          class="d-inline-block"
+                          th:method="DELETE"
+                          th:action="@{'/bookclubs/{id}/remove-member' (id=${bookclub.getId()})}">
+                        <input hidden type="text" name="userId" th:value="${member.getId()}"/>
+                        <button class="btn btn-danger" type="submit">Kick</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</th:block>

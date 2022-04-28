@@ -1,0 +1,42 @@
+<th:block xmlns:th="http://www.thymeleaf.org">
+    <div class="container">
+        <div class="row col-lg-2 my-5 align-items-start justify-content-start">
+            <a th:href="@{/bookclubs/add}" class="btn text-white" style="background-color: #008C76;">
+                Create a Book Club
+            </a>
+        </div>
+        <div class="row mb-3 justify-content-center" th:each="bookclub : ${bookClubs}">
+            <div class="card shadow-sm col-lg-6">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${bookclub.getName()}"></h5>
+                    <p class="card-text" th:text="${bookclub.getDescription()}"></p>
+                    <div class="d-grid gap-2 d-md-block">
+                        <a th:if="${bookclub.isMember(loggedIn)}"
+                           class="btn btn-primary"
+                           th:href="@{'/bookclubs/{id}' (id=${bookclub.getId()})}">View</a>
+                        <form th:if="${!bookclub.isMember(loggedIn)}"
+                              class="d-inline-block" th:method="POST"
+                              th:action="@{'/bookclubs/{id}/request' (id=${bookclub.getId()})}">
+                            <button class="btn btn-success" type="submit">Request Membership</button>
+                        </form>
+                        <a th:if="${bookclub.getOwner().getId() == loggedIn.getId()}"
+                           class="btn btn-warning"
+                           th:href="@{'/bookclubs/{id}/edit' (id=${bookclub.getId()})}">Edit
+                        </a>
+                        <form th:if="${bookclub.getOwner().getId() == loggedIn.getId()}"
+                              class="d-inline-block"
+                              th:method="DELETE"
+                              th:action="@{'/bookclubs/{id}/delete' (id=${bookclub.getId()})}">
+                            <button class="btn btn-danger" type="submit">Delete Club</button>
+                        </form>
+                    </div>
+                </div>
+                <hr/>
+                <div class="text-muted pt-0 pb-2">Owner: <span
+                        th:text="${bookclub.getOwner().getName()} + ' ' + ${bookclub.getOwner().getSurname()}"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>
+

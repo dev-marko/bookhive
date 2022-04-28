@@ -1,0 +1,17 @@
+<th:block xmlns:th="http://www.thymeleaf.org">
+    <div class="container">
+        <div class="row justify-content-center">
+            <form class="col-lg-6" th:method="POST" th:action='@{/topic/add}'>
+                <input id="bookClubId" name="bookClubId" type="text" hidden th:value="${bookClubId}"/>
+                <div class="mb-3">
+                    <label for="title" class="form-label">Title</label>
+                    <input type="text" class="form-control" id="title" name="title">
+                </div>
+
+                <a th:href="@{'/bookclubs/{id}' (id=${bookClubId})}" type="submit" class="btn text-white"
+                   style="background-color: #008C76;">Back</a>
+                <button type="submit" class="btn text-white" style="background-color: #008C76;">Create</button>
+            </form>
+        </div>
+    </div>
+</th:block>

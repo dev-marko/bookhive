@@ -1,0 +1,53 @@
+<th:block xmlns:th="http://www.thymeleaf.org">
+    <div class="container">
+        <div class="row">
+            <section class="p-5 mb-4 bg-light rounded-3">
+                <div class="container-fluid">
+                    <h1 class="display-5 fw-bold" th:text="${bookclub.getName()}"></h1>
+                    <p class="col-md-8 fs-4" th:text="${bookclub.getDescription()}"></p>
+                    <div class="d-grid gap-2 d-md-block">
+                        <a th:href="@{'/bookclubs/{id}/members' (id=${bookclub.getId()})}" class="btn btn-primary"
+                           type="button">Members</a>
+                        <a th:href="@{'/bookclubs/{id}/invitation' (id=${bookclub.getId()})}" class="btn btn-success"
+                           type="button">Invite</a>
+                        <a th:if="${bookclub.getOwner().getId() == loggedIn.getId()}"
+                           th:href="@{'/bookclubs/{id}/requests' (id=${bookclub.getId()})}" class="btn btn-success"
+                           type="button">View Requests</a>
+                        <form th:if="${bookclub.getOwner().getId() != loggedIn.getId()}"
+                              class="d-inline-block"
+                              th:method="DELETE"
+                              th:action="@{'/bookclubs/{id}/leave' (id=${bookclub.getId()})}">
+                            <input hidden type="text" name="userId" th:value="${loggedIn.getId()}"/>
+                            <button class="btn btn-danger" type="submit">Leave</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div class="row justify-content-start">
+            <section class="p-5 mb-4 bg-light rounded-3">
+                <div class="mb-3">
+                    <a th:href="@{'/topic/add' (bookClubId=${bookclub.getId()})}" class="btn text-white"
+                       style="background-color: #008C76;">Create New Topic</a>
+                </div>
+                <div class="card shadow-sm" th:each="topic : ${topics}">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <a th:href="@{'/topic/{id}' (id=${topic.getId()})}" class="text-decoration-none link-dark"
+                               th:text="${topic.getTitle()}"></a>
+                        </h5>
+                        <hr/>
+                        <div class="text-muted">
+                            <p>
+                                Created by: <span
+                                    th:text="${topic.getUser().getName()} + ' ' + ${topic.getUser().getSurname()}"
+                                    class="pe-3"></span>
+                                Date created: <span th:text="${topic.getDateCreated().toString()}"></span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</th:block>
