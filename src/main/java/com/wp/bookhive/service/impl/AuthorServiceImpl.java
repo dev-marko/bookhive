@@ -6,20 +6,17 @@ import com.wp.bookhive.models.exceptions.AuthorNotFoundException;
 import com.wp.bookhive.repository.AuthorRepository;
 import com.wp.bookhive.repository.BookRepository;
 import com.wp.bookhive.service.AuthorService;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class AuthorServiceImpl implements AuthorService {
 
     private final AuthorRepository authorRepository;
     private final BookRepository bookRepository;
-
-    public AuthorServiceImpl(AuthorRepository authorRepository, BookRepository bookRepository) {
-        this.authorRepository = authorRepository;
-        this.bookRepository = bookRepository;
-    }
 
     @Override
     public List<Author> findAll() {

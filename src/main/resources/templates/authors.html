@@ -1,6 +1,6 @@
 <th:block xmlns:th="http://www.thymeleaf.org">
     <div class="container">
-        <a th:href="@{/authors/add}" class="btn text-white mb-3" style="background-color: #008C76;">Add Author</a>
+        <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/authors/add}" class="btn text-white mb-3" style="background-color: #008C76;">Add Author</a>
         <table class="table">
             <thead>
             <tr>
@@ -15,9 +15,9 @@
                 <td th:text="${author.getName()}"></td>
                 <td th:text="${author.getSurname()}"></td>
                 <td colspan="2">
-                    <a th:href="@{'/authors/biography/{id}' (id=${author.getId()})}"
-                       class="btn btn-sm btn-info">Details</a>
-                    <a th:href="@{'/authors/{id}' (id=${author.getId()})}" class="btn btn-sm btn-warning">Edit</a>
+                    <a th:href="@{'/authors/{id}/view' (id=${author.getId()})}" class="btn btn-sm btn-info">Details</a>
+                    <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{'/authors/{id}' (id=${author.getId()})}" class="btn btn-sm btn-warning">Edit</a>
+                    <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{'/authors/{id}/delete' (id=${author.getId()})}" class="btn btn-sm btn-danger">Delete</a>
                 </td>
             </tr>
             </tbody>

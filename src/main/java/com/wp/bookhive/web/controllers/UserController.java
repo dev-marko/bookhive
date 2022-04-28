@@ -6,6 +6,7 @@ import com.wp.bookhive.models.entities.User;
 import com.wp.bookhive.service.InvitationService;
 import com.wp.bookhive.service.UserService;
 import lombok.AllArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -21,6 +22,7 @@ public class UserController {
     private final UserService userService;
     private final InvitationService invitationService;
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     @GetMapping("/user")    //dali da se stavi @PathVariable za userId?
     public String getUserViewPage(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();

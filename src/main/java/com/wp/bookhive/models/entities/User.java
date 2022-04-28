@@ -16,7 +16,6 @@ import java.util.List;
 @Entity
 @NoArgsConstructor
 @Table(name = "bookhive_user")
-//@DiscriminatorValue(value = "DB_USER")
 public class User implements UserDetails {
 
     @Id
@@ -62,10 +61,11 @@ public class User implements UserDetails {
         this.role = role;
     }
 
-    public User(String name, String surname, String email, String password, Roles role) {
+    public User(String name, String surname, String email, String password) {
+        this.name = name;
+        this.surname = surname;
         this.email = email;
         this.password = password;
-        this.role = role;
     }
 
     private boolean isAccountNonExpired = true;

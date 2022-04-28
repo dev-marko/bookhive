@@ -12,13 +12,8 @@ public class CustomOAuth2User implements OAuth2User {
     private OAuth2User oauth2User;
 
     public CustomOAuth2User(OAuth2User oauth2User, String oauth2ClientName) {
-        super();
         this.oauth2User = oauth2User;
         this.oauth2ClientName = oauth2ClientName;
-    }
-
-    public CustomOAuth2User() {
-        super();
     }
 
     @Override
@@ -40,7 +35,7 @@ public class CustomOAuth2User implements OAuth2User {
         return oauth2User.getAttribute("email");
     }
 
-    public String getOauth2ClientName() {
-        return this.oauth2ClientName;
-    }
+//    public String getOauth2ClientName() {
+//        return this.oauth2ClientName;
+//    }
 }

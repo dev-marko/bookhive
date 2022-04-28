@@ -4,6 +4,7 @@ import com.wp.bookhive.models.entities.Publisher;
 import com.wp.bookhive.models.exceptions.*;
 import com.wp.bookhive.repository.PublisherRepository;
 import com.wp.bookhive.service.PublisherService;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -11,13 +12,10 @@ import java.util.List;
 import java.util.Objects;
 
 @Service
+@AllArgsConstructor
 public class PublishableServiceImpl implements PublisherService {
 
     private final PublisherRepository publisherRepository;
-
-    public PublishableServiceImpl(PublisherRepository publisherRepository) {
-        this.publisherRepository = publisherRepository;
-    }
 
     @Override
     public List<Publisher> getAllPublishers() {

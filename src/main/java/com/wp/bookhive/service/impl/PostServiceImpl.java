@@ -10,22 +10,18 @@ import com.wp.bookhive.repository.PostRepository;
 import com.wp.bookhive.repository.TopicRepository;
 import com.wp.bookhive.repository.UserRepository;
 import com.wp.bookhive.service.PostService;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class PostServiceImpl implements PostService {
 
     private final PostRepository postRepository;
     private final UserRepository userRepository;
     private final TopicRepository topicRepository;
-
-    public PostServiceImpl(PostRepository postRepository, UserRepository userRepository, TopicRepository topicRepository) {
-        this.postRepository = postRepository;
-        this.userRepository = userRepository;
-        this.topicRepository = topicRepository;
-    }
 
     @Override
     public List<Post> findAll() {
@@ -53,13 +49,11 @@ public class PostServiceImpl implements PostService {
     @Override
     public Post edit(Integer postId, String content, Integer userId, Integer topicId) {
         Post post = this.findById(postId);
-
         post.setContent(content);
         Topic topic = this.topicRepository.findById(topicId).orElseThrow(() -> new TopicNotFoundException(topicId));
         post.setTopic(topic);
         User user = this.userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException(userId));
         post.setUser(user);
-
         return this.postRepository.save(post);
     }
 

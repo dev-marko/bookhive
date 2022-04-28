@@ -40,22 +40,22 @@
             <li th:classappend="${home_selected!=null ? 'selected' : 'notselected'}">
                 <a th:href="@{/user}">Home</a>
             </li>
-            <li th:classappend="${mybooks_selected!=null ? 'selected' : 'notselected'}">
+            <li sec:authorize="hasRole('ROLE_USER')" th:classappend="${mybooks_selected!=null ? 'selected' : 'notselected'}">
                 <a th:href="@{/my-books}">My Books</a>
             </li>
-            <li th:classappend="${mybookclubs_selected!=null ? 'selected' : 'notselected'}">
+            <li sec:authorize="hasRole('ROLE_USER')" th:classappend="${mybookclubs_selected!=null ? 'selected' : 'notselected'}">
                 <a th:href="@{/my-bookclubs}">My Book Clubs</a>
             </li>
-            <li th:classappend="${mywishlist_selected!=null ? 'selected' : 'notselected'}">
+            <li sec:authorize="hasRole('ROLE_USER')" th:classappend="${mywishlist_selected!=null ? 'selected' : 'notselected'}">
                 <a th:href="@{/my-wishlist}">My Wishlist</a>
             </li>
-            <li th:classappend="${books_selected!=null ? 'selected' : 'notselected'}">
-                <a th:href="@{/books}">Books</a>
-            </li>
-            <li th:classappend="${authors_selected!=null ? 'selected' : 'notselected'}">
+            <li sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')"  th:classappend="${authors_selected!=null ? 'selected' : 'notselected'}">
                 <a th:href="@{/authors}">Authors</a>
             </li>
-            <li th:classappend="${bookclubs_selected!=null ? 'selected' : 'notselected'}">
+            <li sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')" th:classappend="${books_selected!=null ? 'selected' : 'notselected'}">
+                <a th:href="@{/books}">Books</a>
+            </li>
+            <li sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')"  th:classappend="${bookclubs_selected!=null ? 'selected' : 'notselected'}">
                 <a th:href="@{/bookclubs}">Book Clubs</a>
             </li>
             <li th:classappend="${invitations_selected!=null ? 'selected' : 'notselected'}">
@@ -63,7 +63,7 @@
                     Invitations <span th:if="${invitations!=null && invitations.size()>0}" th:text="${'(' + invitations.size()} + ')'"></span>
                 </a>
             </li>
-            <li th:classappend="${bookshops_selected!=null ? 'selected' : 'notselected'}">
+            <li sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')"  th:classappend="${bookshops_selected!=null ? 'selected' : 'notselected'}">
                 <a th:href="@{/bookshops/all}">Bookshops</a>
             </li>
             <!--                <li>-->

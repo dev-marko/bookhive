@@ -1,32 +1,30 @@
 package com.wp.bookhive.service.impl;
 
-
+import com.wp.bookhive.models.config.oauth2.CustomOAuth2User;
 import com.wp.bookhive.models.entities.User;
 import com.wp.bookhive.models.enums.AuthenticationType;
 import com.wp.bookhive.models.enums.Roles;
 import com.wp.bookhive.models.exceptions.UserNotFoundException;
 import com.wp.bookhive.repository.UserRepository;
-
 import com.wp.bookhive.service.UserService;
+import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.security.InvalidParameterException;
+import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-
-    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder) {
-        this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
-    }
 
     @Override
     public User findById(Integer id) {
@@ -39,7 +37,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User register(String name, String surname, String email, String password, String repeatPassword, Roles role) {
+    public User register(String name, String surname, String email, String password, String repeatPassword) {
         // TODO custom exception
         if (email==null || email.isEmpty()  || password==null || password.isEmpty())
             throw new InvalidParameterException();
@@ -52,8 +50,9 @@ public class UserServiceImpl implements UserService {
             //TODO: throw new UsernameAlreadyExistsException(email);
             throw new BadCredentialsException("Invalid Credentials");
 
-        User user = new User(name, surname, email, passwordEncoder.encode(password), role);
-
+        User user = new User(name, surname, email, passwordEncoder.encode(password));
+        user.setAuthType(AuthenticationType.DATABASE);
+        user.setRole(Roles.ROLE_USER);
 
         return this.userRepository.save(user);
     }
@@ -63,8 +62,17 @@ public class UserServiceImpl implements UserService {
         return this.userRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException(email));
     }
 
-    public void updateAuthenticationType(String username, String oauth2ClientName) {
-        AuthenticationType authType = AuthenticationType.valueOf(oauth2ClientName.toUpperCase());
-        userRepository.updateAuthenticationType(username, authType);
+    @Override
+    public User getAuthenticatedUser() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user;
+        if(auth.getPrincipal() instanceof CustomOAuth2User customOAuth2User) {
+            user = userRepository.findByEmail(customOAuth2User.getEmail()).orElseThrow(() -> new UserNotFoundException(customOAuth2User.getEmail()));
+        } else {
+            user = (User) auth.getPrincipal();
+        }
+        return user;
     }
+
+
 }

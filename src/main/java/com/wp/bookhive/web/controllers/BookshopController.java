@@ -2,6 +2,8 @@ package com.wp.bookhive.web.controllers;
 
 import com.wp.bookhive.models.entities.BookShop;
 import com.wp.bookhive.service.BookshopService;
+import lombok.AllArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -9,15 +11,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RequestMapping("/bookshops")
+@AllArgsConstructor
 @Controller
 public class BookshopController {
 
     private final BookshopService bookshopService;
 
-    public BookshopController(BookshopService bookshopService) {
-        this.bookshopService = bookshopService;
-    }
-
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     @GetMapping("/map")
     public String test(Model model) {
         List<BookShop> bookshopList = this.bookshopService.getAllBookshops();
@@ -25,6 +25,7 @@ public class BookshopController {
         return "bookshop_geolocation";
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     @GetMapping("/all")
     public String getAllBookshops(Model model) {
         List<BookShop> bookshopList = this.bookshopService.getAllBookshops();
@@ -34,6 +35,7 @@ public class BookshopController {
         return "index";
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     @PostMapping("/search")
     public String getAllBookshops(@RequestParam(required = false) String search, Model model) {
         List<BookShop> bookshopList = null;
@@ -45,8 +47,7 @@ public class BookshopController {
         return "index";
     }
 
-
-
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     @GetMapping("/{bookshopId}")
     public String getBookshop(@PathVariable Integer bookshopId, Model model) {
         BookShop bookshop = this.bookshopService.findById(bookshopId);
@@ -54,6 +55,7 @@ public class BookshopController {
         return "bookshop_bio";
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     //plus site knigi
     @GetMapping("/edit/{bookshopId}")
     public String getBookshopEditPage(@PathVariable Integer bookshopId, Model model) {
@@ -62,6 +64,7 @@ public class BookshopController {
         return ""; //sega za sega vaka neka stoi pa ke vidime otposle sto ke se vrakja i dali ke postoi ovaa metoda
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     //edit na bookshop info
     @PostMapping()
     public String saveBookshop(@RequestParam(required = false) Integer bookshopId,
@@ -82,6 +85,7 @@ public class BookshopController {
         return ""; //sega za sega vaka neka stoi pa ke vidime otposle sto ke se vrakja i dali ke postoi ovaa metoda
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/edit/{bookshopId}/add-book")
     public String getAddBookForm(@PathVariable Integer bookshopId, Model model) {
         BookShop bookshop = this.bookshopService.findById(bookshopId);
@@ -89,6 +93,7 @@ public class BookshopController {
         return ""; //blagoj view
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     //edit na bookshop books
     @PostMapping("/edit/{bookshopId}/add-book")
     public String addBook(@PathVariable Integer bookshopId,
@@ -102,6 +107,7 @@ public class BookshopController {
         return ""; //redirect kon @GetMapping("/{bookshopId}")
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("/{bookshopId}")
     public String deleteBookshop(@PathVariable int bookshopId) {
         this.bookshopService.deleteById(bookshopId);

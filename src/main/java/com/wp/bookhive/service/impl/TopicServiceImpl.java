@@ -11,23 +11,19 @@ import com.wp.bookhive.repository.BookclubRepository;
 import com.wp.bookhive.repository.TopicRepository;
 import com.wp.bookhive.repository.UserRepository;
 import com.wp.bookhive.service.TopicService;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class TopicServiceImpl implements TopicService {
 
     private final TopicRepository topicRepository;
     private final BookclubRepository bookclubRepository;
     private final UserRepository userRepository;
-
-    public TopicServiceImpl(TopicRepository topicRepository, BookclubRepository bookclubRepository, UserRepository userRepository) {
-        this.topicRepository = topicRepository;
-        this.bookclubRepository = bookclubRepository;
-        this.userRepository = userRepository;
-    }
 
     @Override
     public List<Topic> findAll() {

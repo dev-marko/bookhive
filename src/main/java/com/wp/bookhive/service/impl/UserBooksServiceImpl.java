@@ -9,22 +9,18 @@ import com.wp.bookhive.repository.BookRepository;
 import com.wp.bookhive.repository.UserBookRepository;
 import com.wp.bookhive.repository.UserRepository;
 import com.wp.bookhive.service.UserBooksService;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class UserBooksServiceImpl implements UserBooksService {
 
     private final UserRepository userRepository;
     private final UserBookRepository userBookRepository;
     private final BookRepository bookRepository;
-
-    public UserBooksServiceImpl(UserRepository userRepository, UserBookRepository userBookRepository, BookRepository bookRepository) {
-        this.userRepository = userRepository;
-        this.userBookRepository = userBookRepository;
-        this.bookRepository = bookRepository;
-    }
 
     @Override
     public UserBook findByUserAndBook(Integer userId, Integer bookId) {

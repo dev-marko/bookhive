@@ -14,7 +14,7 @@
         }
     </style>
     <div class="container-lg">
-        <div class="row col-lg-2 my-5 align-items-start justify-content-start">
+        <div sec:authorize="hasRole('ROLE_ADMIN')" class="row col-lg-2 my-5 align-items-start justify-content-start">
             <a th:href="@{/books/form}" class="btn text-white" style="background-color: #008C76;">
                 Add Book
             </a>
