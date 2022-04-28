@@ -4,6 +4,7 @@ import com.wp.bookhive.models.entities.BookClub;
 import com.wp.bookhive.models.entities.Topic;
 import com.wp.bookhive.models.entities.User;
 import com.wp.bookhive.models.exceptions.BookclubNotFoundException;
+import com.wp.bookhive.models.exceptions.TopicAlreadyExistsException;
 import com.wp.bookhive.models.exceptions.TopicNotFoundException;
 import com.wp.bookhive.models.exceptions.UserNotFoundException;
 import com.wp.bookhive.repository.BookclubRepository;
@@ -13,6 +14,7 @@ import com.wp.bookhive.service.TopicService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TopicServiceImpl implements TopicService {
@@ -45,13 +47,25 @@ public class TopicServiceImpl implements TopicService {
 
     @Override
     public Topic save(String title, Integer userId, Integer bookClubId) {
+
+        if (this.topicRepository.findByTitle(title).isPresent()) {
+            throw new TopicAlreadyExistsException(title);
+        }
+
         User user = this.userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException(userId));
         BookClub bookClub = this.bookclubRepository.findById(bookClubId).orElseThrow(() -> new BookclubNotFoundException(bookClubId));
+
+
         return this.topicRepository.save(new Topic(user, bookClub, title));
     }
 
     @Override
     public Topic edit(Integer topicId, String title, Integer userId, Integer bookClubId) {
+
+        if (this.topicRepository.findByTitle(title).isPresent()) {
+            throw new TopicAlreadyExistsException(title);
+        }
+
         Topic topic = this.findById(topicId);
 
         topic.setTitle(title);

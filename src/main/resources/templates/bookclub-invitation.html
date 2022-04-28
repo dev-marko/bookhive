@@ -1,0 +1,21 @@
+<th:block xmlns:th="http://www.thymeleaf.org">
+    <div class="container">
+        <div class="row justify-content-center">
+            <form class="col-lg-6" th:method="POST" th:action="@{/invite}">
+                <input type="text" name="bookClubId" id="bookClubId" th:value="${bookClubId}" hidden/>
+                <input type="text" name="senderId" id="senderId" th:value="${senderId}" hidden/>
+                <div class="mb-3">
+                    <label for="receiverEmail" class="form-label">Receiver's email</label>
+                    <input type="email" class="form-control" id="receiverEmail" name="receiverEmail">
+                </div>
+                <div class="mb-3">
+                    <label for="message" class="form-label">Message</label>
+                    <input type="text" class="form-control" id="message" name="message">
+                </div>
+                <a th:href="@{'/bookclubs/{id}' (id=${bookclubId})}" type="submit" class="btn text-white"
+                   style="background-color: #008C76;">Back</a>
+                <button type="submit" class="btn text-white" style="background-color: #008C76;">Send Invitation</button>
+            </form>
+        </div>
+    </div>
+</th:block>

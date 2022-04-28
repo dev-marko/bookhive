@@ -1,0 +1,19 @@
+<th:block  xmlns:th="http://www.thymeleaf.org">
+    <div class="container">
+        <div class="row justify-content-center">
+            <form class="col-lg-6" th:method="POST" th:action="@{/bookclubs}">
+                <input hidden type="text" id="bookclubId" name="bookclubId" th:value="${bookclub?.getId()}"/>
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <input th:value="${bookclub?.getName()}" type="text" class="form-control" id="name" name="name">
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Description</label>
+                    <input th:value="${bookclub?.getDescription()}" type="text" class="form-control" id="description" name="description">
+                </div>
+                <a th:href="@{/bookclubs}" type="submit" class="btn text-white" style="background-color: #008C76;">Back</a>
+                <button type="submit" class="btn text-white" style="background-color: #008C76;">Save</button>
+            </form>
+        </div>
+    </div>
+</th:block>

@@ -1,8 +1,11 @@
 package com.wp.bookhive.models.entities;
 
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 
@@ -24,9 +27,20 @@ public class Invitation {
     @JoinColumn
     private User receiver;
 
-    @ManyToOne
+    @ManyToOne()
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn
     private BookClub bookClub;
 
     private String message;
+
+    private Boolean isRequest;
+
+    public Invitation(User sender, User receiver, BookClub bookClub, String message, Boolean isRequest) {
+        this.sender = sender;
+        this.receiver = receiver;
+        this.bookClub = bookClub;
+        this.message = message;
+        this.isRequest = isRequest;
+    }
 }

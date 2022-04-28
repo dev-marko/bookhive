@@ -7,9 +7,14 @@ import java.util.List;
 public interface BookshopService {
 
     List<BookShop> getAllBookshops();
+
     List<BookShop> searchBookshops(String search);
+
     BookShop findById(Integer bookshopId);
+
     BookShop edit(Integer bookshopId, String address, String city, String name, String bookshopEmail, String phoneNumber, String webSiteLink, String latitude, String longitude);
+
     BookShop save(String address, String city, String name, String bookshopEmail, String phoneNumber, String webSiteLink, String latitude, String longitude);
+
     void deleteById(int bookshopId);
 }

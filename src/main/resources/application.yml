@@ -17,7 +17,7 @@ spring:
     hikari:
       connectionTimeout: '20000'
       maximumPoolSize: '5'
-    password: root
+    password: marko123
   jpa:
     properties:
       hibernate:
