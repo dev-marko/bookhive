@@ -25,7 +25,6 @@ public class BookshopController {
         return "bookshop_geolocation";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     @GetMapping("/all")
     public String getAllBookshops(Model model) {
         List<BookShop> bookshopList = this.bookshopService.getAllBookshops();
@@ -35,7 +34,6 @@ public class BookshopController {
         return "index";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     @PostMapping("/search")
     public String getAllBookshops(@RequestParam(required = false) String search, Model model) {
         List<BookShop> bookshopList = null;
@@ -47,7 +45,6 @@ public class BookshopController {
         return "index";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     @GetMapping("/{bookshopId}")
     public String getBookshop(@PathVariable Integer bookshopId, Model model) {
         BookShop bookshop = this.bookshopService.findById(bookshopId);

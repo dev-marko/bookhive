@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 public class AuthorController {
     private final AuthorService authorService;
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     @GetMapping
     public String getAllAuthors(Model model) {
         model.addAttribute("authors", this.authorService.findAll());
@@ -47,7 +46,6 @@ public class AuthorController {
         return "add-author";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     @GetMapping("/{id}/view")
     public String getAuthorBiography(@PathVariable Integer id, Model model) throws Exception {
         Author author = authorService.findById(id);

@@ -65,6 +65,7 @@ public class BookController {
         return "index";
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/form")
     public String getAddBook(Model model){
         model.addAttribute("authors", this.authorService.findAll());
@@ -72,6 +73,7 @@ public class BookController {
         return "book";
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/add")
     public String saveBook(
             @RequestParam(required = false) Integer id,

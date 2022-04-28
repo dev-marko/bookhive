@@ -49,21 +49,21 @@
             <li sec:authorize="hasRole('ROLE_USER')" th:classappend="${mywishlist_selected!=null ? 'selected' : 'notselected'}">
                 <a th:href="@{/my-wishlist}">My Wishlist</a>
             </li>
-            <li sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')"  th:classappend="${authors_selected!=null ? 'selected' : 'notselected'}">
+            <li th:classappend="${authors_selected!=null ? 'selected' : 'notselected'}">
                 <a th:href="@{/authors}">Authors</a>
             </li>
-            <li sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')" th:classappend="${books_selected!=null ? 'selected' : 'notselected'}">
+            <li th:classappend="${books_selected!=null ? 'selected' : 'notselected'}">
                 <a th:href="@{/books}">Books</a>
             </li>
-            <li sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')"  th:classappend="${bookclubs_selected!=null ? 'selected' : 'notselected'}">
+            <li sec:authorize="hasRole('ROLE_USER')" th:classappend="${bookclubs_selected!=null ? 'selected' : 'notselected'}">
                 <a th:href="@{/bookclubs}">Book Clubs</a>
             </li>
-            <li th:classappend="${invitations_selected!=null ? 'selected' : 'notselected'}">
+            <li sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')" th:classappend="${invitations_selected!=null ? 'selected' : 'notselected'}">
                 <a th:href="@{/invitations}" class="position-relative">
                     Invitations <span th:if="${invitations!=null && invitations.size()>0}" th:text="${'(' + invitations.size()} + ')'"></span>
                 </a>
             </li>
-            <li sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')"  th:classappend="${bookshops_selected!=null ? 'selected' : 'notselected'}">
+            <li  th:classappend="${bookshops_selected!=null ? 'selected' : 'notselected'}">
                 <a th:href="@{/bookshops/all}">Bookshops</a>
             </li>
             <!--                <li>-->
@@ -71,7 +71,7 @@
             <!--                </li>-->
         </ul>
 
-            <div id="logout" style="position: fixed;">
+            <div sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')" id="logout" style="position: fixed;">
                 <a href="/logout">Logout</a>
             </div>
     </nav>
@@ -86,7 +86,7 @@
                     <span></span>
                 </button>
 
-                <div id="navbarSupportedContent">
+                <div sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')" id="navbarSupportedContent">
                     <ul class="nav navbar-nav ml-auto">
                         <li class="nav-item active">
                             <a class="nav-link" href="#" id="myProfile">My profile</a>
