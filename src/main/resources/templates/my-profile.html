@@ -1,0 +1,67 @@
+<th:block xmlns:th="http://www.thymeleaf.org">
+    <div id="container">
+        <div class="ms-4" id="left">
+            <form method="post" th:action="@{/user/profile/edit}">
+                <div>
+                    <div>
+                        <span>Name</span>
+                    </div>
+                    <div>
+                        <input th:value="${user?.name}" type="text" placeholder="Enter your name" name="name" >
+                    </div>
+                </div>
+                <div class=" mt-3">
+                    <div>
+                        <span>Surname</span>
+                    </div>
+                    <div>
+                        <input th:value="${user?.surname}" type="text" placeholder="Enter your surname" name="surname" >
+                    </div>
+                </div>
+                <div class=" mt-3">
+                    <div>
+                        <span>Age</span>
+                    </div>
+                    <div>
+                        <input th:value="${user?.age}" type="number" placeholder="Enter your age" name="age" >
+                    </div>
+                </div>
+                <div class="mt-3">
+                    <div>
+                        <span>Address</span>
+                    </div>
+                    <div>
+                        <input th:value="${user?.address}" type="text" placeholder="Enter your address" name="address" >
+                    </div>
+                </div>
+                <div class=" mt-3" th:if="${user?.authType.toString().equals('DATABASE')}">
+                    <div>
+                        <span>Email</span>
+                    </div>
+                    <div>
+                        <input th:value="${user?.email}" type="text" placeholder="Enter your email" name="email" >
+                    </div>
+                </div>
+                <div class="mt-3" th:if="${user?.authType.toString().equals('DATABASE')}">
+                    <div>
+                        <span>Password</span>
+                    </div>
+                    <div>
+                        <input placeholder="Enter your password" type="password" name="password" >
+                    </div>
+                </div>
+                <div class="mt-3" th:if="${user?.authType.toString().equals('DATABASE')}">
+                    <div>
+                        <span>Confirm Password</span>
+                    </div>
+                    <div>
+                        <input placeholder="Confirm your password" type="password" name="confirmPassword" >
+                    </div>
+                </div>
+                <div style="display: flex; align-items: stretch; width: 15%; margin-top: 20px;">
+                    <button style="flex: 1; font-size: 15px;" class="btn btn-success btn-lg m-2 w-25" id="submit" type="submit">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</th:block>

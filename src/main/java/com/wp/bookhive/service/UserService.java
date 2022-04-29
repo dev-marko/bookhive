@@ -8,4 +8,5 @@ public interface UserService extends UserDetailsService {
     User findByEmail(String email);
     User register(String name, String surname, String username, String password, String repeatPassword);
     User getAuthenticatedUser();
+    User update(User user, String name, String surname, Integer age, String address, String email, String password, String confirmPassword);
 }
