@@ -1,4 +1,11 @@
 <!--    <link rel="stylesheet" href="/bookshops_style.css">-->
+
+<a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/bookshops/add}" class="btn text-white"
+   style="background-color: #008C76;">
+    Add a Bookshop
+</a>
+
+
     <div class="w-50 my-4 mx-auto" id="searchCont">
         <form method="post" action="/bookshops/search">
             <input type="text" class="form-control" placeholder="Внесете име на книжарница.." name="search">
@@ -25,7 +32,11 @@
                             <p class="card-text">
                                 <a th:href="${bookshop.webSiteLink}" class="link-info" style="text-decoration: none;color: black !important;">Линк кон веб страна</a>
                             </p>
-                        </div>
+                            <form method="post" th:action="@{'/bookshops/delete/{id}' (id=${bookshop.id})}" sec:authorize="hasRole('ROLE_ADMIN')">
+                                <a th:href="@{'/bookshops/{id}' (id=${bookshop.id})}" class="btn btn-danger">View details</a>
+                                <a th:href="@{'/bookshops/edit/{id}' (id=${bookshop.id})}" sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-danger">Edit</a>
+                                <button type="submit" class="btn btn-danger">Delete</button></form>
+                            </div>
                     </div>
                 </div>
 

@@ -87,7 +87,7 @@
     </div>
 </div>
 <div style="display: flex; justify-content: center">
-<a class="button" href="/bookshop/map" >Open map to view the location of the bookshops</a>
+<a class="button" th:href="@{'/bookshops/map/{bookId}' (bookId=${book.id})}" >Open map to view the location of the bookshops that have this book</a>
 </div>
 
 </body>

@@ -64,7 +64,7 @@
                                 </a>
                             </div>
                             <div sec:authorize="hasRole('ROLE_USER')" class="d-inline-block p-0">
-                                <a href="#" class="btn btn-sm text-white mt-3" style="background-color: #008C76;">
+                                <a th:href="@{'/books/{id}/view' (id=${book.getId()})}" class="btn btn-sm text-white mt-3" style="background-color: #008C76;">
                                     Details
                                 </a>
                             </div>

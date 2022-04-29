@@ -1,7 +1,9 @@
 package com.wp.bookhive.service.impl;
 
+import com.wp.bookhive.models.entities.Book;
 import com.wp.bookhive.models.entities.BookShop;
 import com.wp.bookhive.models.exceptions.*;
+import com.wp.bookhive.repository.BookRepository;
 import com.wp.bookhive.repository.BookshopRepository;
 import com.wp.bookhive.service.BookshopService;
 import org.springframework.stereotype.Service;
@@ -14,9 +16,11 @@ import java.util.Objects;
 public class BookshopServiceImpl implements BookshopService {
 
     private final BookshopRepository bookshopRepository;
+    private final BookRepository bookRepository;
 
-    public BookshopServiceImpl(BookshopRepository bookshopRepository) {
+    public BookshopServiceImpl(BookshopRepository bookshopRepository, BookRepository bookRepository) {
         this.bookshopRepository = bookshopRepository;
+        this.bookRepository = bookRepository;
     }
 
     @Override
@@ -37,13 +41,16 @@ public class BookshopServiceImpl implements BookshopService {
 
     @Override
     @Transactional
-    public BookShop edit(Integer bookshopId, String address, String city, String name, String bookshopEmail, String phoneNumber, String webSiteLink, String latitude, String longitude) {
+    public BookShop edit(Integer bookshopId, String address, String city, String name, String bookshopEmail, String phoneNumber, String webSiteLink, String latitude, String longitude, List<Integer> books) {
         BookShop bookShop = this.bookshopRepository.findById(bookshopId).orElseThrow(() -> new BookshopNotFoundException(bookshopId));
 
         this.checkAddress(address, bookShop);
         this.checkCity(city, bookShop);
         this.checkLatAndLot(latitude, longitude, bookShop);
         this.checkPhoneNumber(phoneNumber,bookShop);
+        List<Book> books1 = bookRepository.findAllById(books);
+        bookShop.setBooks(books1);
+        bookShop.setWebSiteLink(webSiteLink);
 
         if(name != null && !name.equals("")) {
             if (this.bookshopRepository.findAll().stream()
@@ -73,13 +80,16 @@ public class BookshopServiceImpl implements BookshopService {
 
     @Override
     @Transactional
-    public BookShop save(String address, String city, String name, String bookshopEmail, String phoneNumber, String webSiteLink, String latitude, String longitude) {
+    public BookShop save(String address, String city, String name, String bookshopEmail, String phoneNumber, String webSiteLink, String latitude, String longitude, List<Integer> books) {
         BookShop bookShop = new BookShop();
 
         this.checkAddress(address, bookShop);
         this.checkCity(city, bookShop);
         this.checkLatAndLot(latitude, longitude, bookShop);
         this.checkPhoneNumber(phoneNumber,bookShop);
+        List<Book> books1 = bookRepository.findAllById(books);
+        bookShop.setBooks(books1);
+        bookShop.setWebSiteLink(webSiteLink);
 
         if(name != null && !name.equals("")) {
             if (this.bookshopRepository.findAll().stream()
@@ -105,6 +115,11 @@ public class BookshopServiceImpl implements BookshopService {
 
         this.bookshopRepository.save(bookShop);
         return bookShop;
+    }
+
+    @Override
+    public List<BookShop> findAllByBook(Book book) {
+        return bookshopRepository.getAllByBooks(book);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.wp.bookhive.models.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,6 +24,7 @@ public class BookShop {
     private String phoneNumber;
     private String webSiteLink;
 
+    @JsonBackReference
     @ManyToMany
     private List<Book> books;
 
