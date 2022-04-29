@@ -45,6 +45,7 @@ public class InvitationsController {
 
         List<Invitation> invitations = this.invitationService.findByReceiver(user.getEmail());
         model.addAttribute("invitations", invitations);
+        model.addAttribute("invitations_selected", true);
         model.addAttribute("bodyContent", "invitations-all");
 
         return "index";

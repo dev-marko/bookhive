@@ -33,6 +33,7 @@ public class UserBookclubsController {
 
         model.addAttribute("bookClubs", this.bookclubService.findByMember(user.getId()));
         model.addAttribute("loggedIn", user);
+        model.addAttribute("mybookclubs_selected", true);
         model.addAttribute("bodyContent", "my-bookclubs");
 
         return "index";

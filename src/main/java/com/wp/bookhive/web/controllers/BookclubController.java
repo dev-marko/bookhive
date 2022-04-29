@@ -2,6 +2,7 @@ package com.wp.bookhive.web.controllers;
 
 import com.wp.bookhive.models.config.oauth2.CustomOAuth2User;
 import com.wp.bookhive.models.entities.BookClub;
+import com.wp.bookhive.models.entities.BookShop;
 import com.wp.bookhive.models.entities.Topic;
 import com.wp.bookhive.models.entities.User;
 import com.wp.bookhive.service.BookclubService;
@@ -27,8 +28,6 @@ public class BookclubController {
     private final TopicService topicService;
     private final InvitationService invitationService;
 
-    // TODO search bar for all-books
-
     @GetMapping
     public String getAllBookclubs(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -40,6 +39,30 @@ public class BookclubController {
         }
 
         model.addAttribute("bookClubs", this.bookclubService.findAll());
+        model.addAttribute("loggedIn", user);
+        model.addAttribute("bookclubs_selected", true);
+        model.addAttribute("bodyContent", "bookclubs-all");
+        return "index";
+    }
+
+    @PostMapping("/search")
+    public String getBookclubsSearch(@RequestParam(required = false) String search, Model model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user;
+        if (auth.getPrincipal() instanceof CustomOAuth2User customOAuth2User) {
+            user = userService.findByEmail(customOAuth2User.getEmail());
+        } else {
+            user = (User) auth.getPrincipal();
+        }
+
+        List<BookClub> bookClubList = null;
+        if (search != null) {
+            bookClubList = this.bookclubService.findAllByNameContainingIgnoreCase(search);
+        } else {
+            bookClubList = this.bookclubService.findAll();
+        }
+        model.addAttribute("bookClubs", bookClubList);
+        model.addAttribute("bookclubs_selected", true);
         model.addAttribute("loggedIn", user);
         model.addAttribute("bodyContent", "bookclubs-all");
         return "index";

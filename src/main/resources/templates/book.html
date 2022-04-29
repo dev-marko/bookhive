@@ -51,6 +51,7 @@
         <input th:value="${book?.description}" placeholder="Enter the description of the book" name="description"
                required>
         <input th:value="${book?.isbn}" placeholder="Enter the ISBN of the book" name="isbn" required>
+        <input th:value="${book?.coverImageUrl}" placeholder="Enter a cover image URL" name="ciu" required>
         <input type="text" onfocus="(this.type='date')" onblur="if(!this.value) this.type='text'"
                th:value="${book?.datePublished}" placeholder="Enter the publish date of the book" name="datePublished"
                required>

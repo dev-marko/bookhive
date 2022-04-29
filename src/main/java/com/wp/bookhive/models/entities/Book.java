@@ -37,10 +37,11 @@ public class Book {
     @OneToMany(mappedBy = "book")
     private List<UserBook> userBooks;
 
-    public Book(String isbn, String name, String description, LocalDate datePublished, List<Author> authors, List<Genres> genres) {
+    public Book(String isbn, String name, String description, String ciu, LocalDate datePublished, List<Author> authors, List<Genres> genres) {
         this.isbn = isbn;
         this.name = name;
         this.description = description;
+        this.coverImageUrl = ciu;
         this.datePublished = datePublished;
         this.authors = authors;
         this.genres = genres;

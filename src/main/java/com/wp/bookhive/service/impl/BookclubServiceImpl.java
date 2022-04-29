@@ -36,6 +36,11 @@ public class BookclubServiceImpl implements BookclubService {
     }
 
     @Override
+    public List<BookClub> findAllByNameContainingIgnoreCase(String containing) {
+        return this.bookclubRepository.findAllByNameContainingIgnoreCase(containing);
+    }
+
+    @Override
     public BookClub save(String name, Integer ownerId, String description) {
         User owner = this.userRepository.findById(ownerId).orElseThrow(() -> new UserNotFoundException(ownerId));
         BookClub bookClub = new BookClub(name, owner, description);

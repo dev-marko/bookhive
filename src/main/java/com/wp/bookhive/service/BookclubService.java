@@ -12,6 +12,8 @@ public interface BookclubService {
 
     List<BookClub> findByMember(Integer userId);
 
+    List<BookClub> findAllByNameContainingIgnoreCase(String containing);
+
     BookClub save(String name, Integer ownerId, String description);
 
     BookClub edit(Integer bookClubId, String name, Integer ownerId, String description);

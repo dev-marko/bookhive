@@ -55,18 +55,19 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Book add(String isbn, String name, String description, LocalDate datePublished, List<Integer> authorIds, List<Genres> genres) {
+    public Book add(String isbn, String name, String description, String ciu, LocalDate datePublished, List<Integer> authorIds, List<Genres> genres) {
         List<Author> authors = this.authorRepository.findAllById(authorIds);
-        return this.bookRepository.save(new Book(isbn, name, description, datePublished, authors, genres));
+        return this.bookRepository.save(new Book(isbn, name, description, ciu, datePublished, authors, genres));
     }
 
     @Override
-    public Book edit(Integer id, String isbn, String name, String description, LocalDate datePublished, List<Integer> authorIds, List<Genres> genres) {
+    public Book edit(Integer id, String isbn, String name, String description, String ciu, LocalDate datePublished, List<Integer> authorIds, List<Genres> genres) {
         Book book = this.findById(id);
 
         book.setIsbn(isbn);
         book.setName(name);
         book.setDescription(description);
+        book.setCoverImageUrl(ciu);
         book.setDatePublished(datePublished);
         book.setGenres(genres);
         List<Author> authors = this.authorRepository.findAllById(authorIds);

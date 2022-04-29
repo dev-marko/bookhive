@@ -5,6 +5,12 @@
                 Create a Book Club
             </a>
         </div>
+        <div class="row w-50 my-4 mx-auto" id="searchCont">
+            <form th:method="POST" th:action="@{/bookclubs/search}">
+                <input type="text" class="form-control" placeholder="Enter a book club name..." name="search">
+                <button class="btn btn-dark w-100 mt-2" type="submit"><i class="fa fa-search"></i>Search</button>
+            </form>
+        </div>
         <div class="row mb-3 justify-content-center" th:each="bookclub : ${bookClubs}">
             <div class="card shadow-sm col-lg-6">
                 <div class="card-body">

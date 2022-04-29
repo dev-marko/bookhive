@@ -13,7 +13,7 @@ public interface BookService {
     Page<Book> findByPage(BookPage bookPage);
     Book findById(Integer id);
     Book findByIsbn(String isbn);
-    Book add(String isbn, String name, String description, LocalDate datePublished, List<Integer> authorIds, List<Genres> genres);
-    Book edit(Integer id, String isbn, String name, String description, LocalDate datePublished, List<Integer> authorIds, List<Genres> genres);
+    Book add(String isbn, String name, String description, String ciu, LocalDate datePublished, List<Integer> authorIds, List<Genres> genres);
+    Book edit(Integer id, String isbn, String name, String description, String ciu, LocalDate datePublished, List<Integer> authorIds, List<Genres> genres);
     void deleteById(Integer id);
 }

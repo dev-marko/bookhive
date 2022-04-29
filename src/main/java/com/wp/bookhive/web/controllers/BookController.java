@@ -1,7 +1,10 @@
 package com.wp.bookhive.web.controllers;
 
 
+import com.wp.bookhive.models.config.oauth2.CustomOAuth2User;
 import com.wp.bookhive.models.entities.Book;
+import com.wp.bookhive.models.entities.BookClub;
+import com.wp.bookhive.models.entities.User;
 import com.wp.bookhive.models.enums.Genres;
 import com.wp.bookhive.models.pages.BookPage;
 import com.wp.bookhive.repository.BookshopRepository;
@@ -10,6 +13,8 @@ import com.wp.bookhive.service.BookService;
 import org.springframework.data.domain.Page;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +24,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-
 
 
 @Controller
@@ -80,6 +84,7 @@ public class BookController {
             @RequestParam String name,
             @RequestParam String description,
             @RequestParam String isbn,
+            @RequestParam String ciu,
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate datePublished,
             @RequestParam List<Integer> authors,
             @RequestParam List<Genres> genres
@@ -87,9 +92,9 @@ public class BookController {
     ){
 
         if (id != null) {
-            this.bookService.edit(id, isbn, name, description, datePublished, authors, genres);
+            this.bookService.edit(id, isbn, name, description, ciu, datePublished, authors, genres);
         } else {
-            this.bookService.add(isbn, name, description, datePublished, authors, genres);
+            this.bookService.add(isbn, name, description, ciu, datePublished, authors, genres);
         }
 
         return "redirect:/books";

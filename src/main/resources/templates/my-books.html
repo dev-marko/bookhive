@@ -1,10 +1,11 @@
 <th:block xmlns:th="http://www.thymeleaf.org">
 
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous">
     </script>
     <script>
-        $( document ).ready(function() {
+        $(document).ready(function () {
             $('#exampleModal').on('show.bs.modal', function (event) {
                 console.log("test")
                 var button = $(event.relatedTarget)
@@ -28,7 +29,8 @@
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
-                            <h5 class="card-title" th:text="${userBook.getBook().getName()}" style="font-weight: bold"></h5>
+                            <h5 class="card-title" th:text="${userBook.getBook().getName()}"
+                                style="font-weight: bold"></h5>
                             <p class="card-text" th:text="${userBook.getBook().getDescription()}">
                             </p>
                             <p class="card-text">Author/s:
@@ -52,14 +54,16 @@
                                     <button class="btn btn-outline-primary">Details</button>
                                 </div>
                                 <div class="d-inline-block p-0">
-<!--                                    <form th:method="POST"
-                                          th:action="@{'/my-books/add/{id}' (id=${book.getId()})}">
-                                        <button type="submit" class="btn btn-outline-warning">
-                                            Edit
-                                        </button>
-                                    </form>-->
+                                    <!--                                    <form th:method="POST"
+                                                                              th:action="@{'/my-books/add/{id}' (id=${book.getId()})}">
+                                                                            <button type="submit" class="btn btn-outline-warning">
+                                                                                Edit
+                                                                            </button>
+                                                                        </form>-->
                                     <!-- Button trigger modal -->
-                                    <button type="button" class="btn btn-outline-warning" th:attr="data-book_id=${userBook.getBook().getId()}" data-toggle="modal" data-target="#exampleModal">
+                                    <button type="button" class="btn btn-outline-warning"
+                                            th:attr="data-book_id=${userBook.getBook().getId()}" data-bs-toggle="modal"
+                                            data-bs-target="#exampleModal">
                                         Edit
                                     </button>
                                 </div>
@@ -74,28 +78,25 @@
 
     <!-- Modal -->
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Last Page Read</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form th:method="POST" th:action="@{/my-books/edit-last-page-read/}">
                         <input type="hidden" id="bookId" name="bookId" value=""/>
                         <label for="lastPage">Edit your last page read:</label>
-                        <input type="number" id="lastPage" name="lastPage"/>
-
+                        <input class="mb-2" type="number" min="0" id="lastPage" name="lastPage"/>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-primary">Save changes</button>
                         </div>
                     </form>
                 </div>
-
             </div>
         </div>
     </div>
