@@ -1,6 +1,8 @@
 <th:block xmlns:th="http://www.thymeleaf.org">
     <div class="container">
-        <table class="table">
+
+        <h1 style="font-size: 80px; color: darkslategrey;" th:if="${invitations.size()==0}">No new invitations :(</h1>
+        <table class="table" th:if="${invitations.size()>0}">
             <thead>
             <tr>
                 <th scope="col">From</th>

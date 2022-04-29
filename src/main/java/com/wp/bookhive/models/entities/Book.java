@@ -33,6 +33,8 @@ public class Book {
     @OneToMany(mappedBy = "book")
     private List<UserBook> userBooks;
 
+    private boolean isValid = true;
+
     public Book(String isbn, String name, String description, String ciu, LocalDate datePublished, List<Author> authors, List<Genres> genres) {
         this.isbn = isbn;
         this.name = name;
@@ -42,5 +44,6 @@ public class Book {
         this.authors = authors;
         this.genres = genres;
     }
+
 
 }

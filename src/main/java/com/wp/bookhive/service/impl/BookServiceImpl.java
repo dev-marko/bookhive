@@ -39,7 +39,7 @@ public class BookServiceImpl implements BookService {
                 bookPage.getCurrentPage(),
                 bookPage.getPageSize(),
                 sort);
-        return this.bookRepository.findAll(pageable);
+        return this.bookRepository.findAllByIsValidTrue(pageable);
     }
 
     @Override
@@ -74,6 +74,8 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public void deleteById(Integer id) {
-        this.bookRepository.deleteById(id);
+        Book book = this.findById(id);
+        book.setValid(false);
+        bookRepository.save(book);
     }
 }

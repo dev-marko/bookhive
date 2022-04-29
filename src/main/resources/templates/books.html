@@ -54,7 +54,7 @@
                                     </button>
                                 </form>
                             </div>
-                            <div sec:authorize="hasRole('ROLE_USER')" class="d-inline-block p-0">
+                            <div class="d-inline-block p-0">
                                 <form th:method="POST"
                                       th:action="@{'/my-books/add/{id}' (id=${book.getId()})}">
                                     <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{'/books/{id}/edit' (id=${book.getId()})}" class="btn btn-sm text-white mt-3" style="background-color: #008C76;">
@@ -63,7 +63,7 @@
                                     <a sec:authorize="hasRole('ROLE_USER')" th:href="@{'/books/{id}/view' (id=${book.getId()})}" class="btn btn-sm text-white mt-3" style="background-color: #008C76;">
                                         Details
                                     </a>
-                                    <button type="submit" class="btn btn-sm text-white mt-3"
+                                    <button sec:authorize="hasRole('ROLE_USER')" type="submit" class="btn btn-sm text-white mt-3"
                                             style="background-color: #008C76;">
                                         My Books
                                     </button>
