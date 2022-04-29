@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Collections;
@@ -54,8 +53,12 @@ public class User implements UserDetails {
     @Column(name = "auth_type")
     private AuthenticationType authType;
 
+    private boolean isAccountNonExpired = true;
+    private boolean isAccountNonLocked = true;
+    private boolean isCredentialsNonExpired = true;
+    private boolean isEnabled = true;
+
     public User(String email, String password, Roles role) {
-        super();
         this.email = email;
         this.password = password;
         this.role = role;
@@ -67,11 +70,6 @@ public class User implements UserDetails {
         this.email = email;
         this.password = password;
     }
-
-    private boolean isAccountNonExpired = true;
-    private boolean isAccountNonLocked = true;
-    private boolean isCredentialsNonExpired = true;
-    private boolean isEnabled = true;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

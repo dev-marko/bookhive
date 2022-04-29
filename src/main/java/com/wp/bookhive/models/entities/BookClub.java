@@ -3,10 +3,10 @@ package com.wp.bookhive.models.entities;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+
 @Data
 @Entity
 @NoArgsConstructor
@@ -44,7 +44,6 @@ public class BookClub {
             if (u.getId().equals(user.getId()))
                 return true;
         }
-
         return false;
     }
 

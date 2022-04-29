@@ -13,7 +13,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDate;
 import java.util.List;
 
@@ -40,7 +39,6 @@ public class BookServiceImpl implements BookService {
                 bookPage.getCurrentPage(),
                 bookPage.getPageSize(),
                 sort);
-
         return this.bookRepository.findAll(pageable);
     }
 
@@ -63,7 +61,6 @@ public class BookServiceImpl implements BookService {
     @Override
     public Book edit(Integer id, String isbn, String name, String description, String ciu, LocalDate datePublished, List<Integer> authorIds, List<Genres> genres) {
         Book book = this.findById(id);
-
         book.setIsbn(isbn);
         book.setName(name);
         book.setDescription(description);
@@ -72,10 +69,8 @@ public class BookServiceImpl implements BookService {
         book.setGenres(genres);
         List<Author> authors = this.authorRepository.findAllById(authorIds);
         book.setAuthors(authors);
-
         return this.bookRepository.save(book);
     }
-
 
     @Override
     public void deleteById(Integer id) {

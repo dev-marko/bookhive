@@ -9,7 +9,6 @@
         </header>
 
         <hr/>
-
         <section class="row my-4 card shadow-sm" th:each="post : ${posts}">
             <div class="card-body">
                 <div class="text-muted">
@@ -25,7 +24,6 @@
                 </p>
             </div>
         </section>
-
         <section class="row">
             <form class="w-100" th:method="POST" th:action="@{'/topic/{id}/add-post' (id=${topic.getId()})}">
                 <div class="mb-3">

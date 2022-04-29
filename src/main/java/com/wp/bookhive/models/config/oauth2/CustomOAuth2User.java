@@ -2,7 +2,6 @@ package com.wp.bookhive.models.config.oauth2;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.core.user.OAuth2User;
-
 import java.util.Collection;
 import java.util.Map;
 
@@ -35,7 +34,4 @@ public class CustomOAuth2User implements OAuth2User {
         return oauth2User.getAttribute("email");
     }
 
-//    public String getOauth2ClientName() {
-//        return this.oauth2ClientName;
-//    }
 }

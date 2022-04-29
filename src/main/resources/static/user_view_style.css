@@ -7,7 +7,6 @@
     position: fixed;
     height: 100%;
     overflow: auto;
-    /*top: 0; !* Stay at the top *!*/
     left: 0;
     font-size: 20px;
 }
@@ -22,18 +21,15 @@
 
 /* Active/current link */
 .sidebar a.active {
-    /*background-color: #555555;*/
     color: #FC766A;
 
 }
 
 /* Links on mouse-over */
 .sidebar a:hover:not(.active) {
-    /*background-color: #555555;*/
     color: #FC766A;
 }
 
-/* fix za ovoj? */
 #logout {
     bottom: 0; !important;
     position: relative; !important;
@@ -41,26 +37,16 @@
     justify-self: flex-end;
     align-self: flex-end;
 }
-
-/*!* Page content. The value of the margin-left property should match the value of the sidebar's width property *!*/
-/*div.content {*/
-/*    margin-left: 180px;*/
-/*    padding: 1px 16px;*/
-/*    height: 1000px;*/
-/*}*/
-
 .main {
     margin-left: 170px;
     padding: 1px 15px;
 }
 
 .top-bar {
-    /*margin-left: 170px; !* Same as the width of the sidebar *!*/
     margin-right: -7px;
     margin-left: -8px;
     margin-top: -8px;
     padding: 0px 10px;
-    /*background-color: #fbbebe;*/
     background-color: #FFDDEE;
     top: 0;
     font-size: 20px;

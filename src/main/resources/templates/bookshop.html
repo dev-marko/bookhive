@@ -70,66 +70,60 @@
     </style>
 </head>
 <body>
-<div id="container">
-    <div id="left">
-    <form method="post" th:action="@{/bookshops/add}">
-        <input id="id" type="hidden" name="bookshopId" th:value="(${bookshop} != null ? ${bookshop.getId()} : '')"/>
-        <input th:value="${bookshop?.name}" placeholder="Enter the name of the bookshop" name="name" required>
-        <input th:value="${bookshop?.address}" placeholder="Enter the address of the bookshop" name="address" required>
-        <input th:value="${bookshop?.city}" placeholder="Enter the city of the bookshop" name="city" required>
+    <div id="container">
+        <div id="left">
+        <form method="post" th:action="@{/bookshops/add}">
+            <input id="id" type="hidden" name="bookshopId" th:value="(${bookshop} != null ? ${bookshop.getId()} : '')"/>
+            <input th:value="${bookshop?.name}" placeholder="Enter the name of the bookshop" name="name" required>
+            <input th:value="${bookshop?.address}" placeholder="Enter the address of the bookshop" name="address" required>
+            <input th:value="${bookshop?.city}" placeholder="Enter the city of the bookshop" name="city" required>
 
-        <input th:value="${bookshop?.bookshopEmail}" placeholder="Enter the email of the bookshop" name="bookshopEmail" required>
-        <input th:value="${bookshop?.phoneNumber}" placeholder="Enter the phone number of the bookshop" name="phoneNumber" required>
-        <input th:value="${bookshop?.webSiteLink}" placeholder="Enter the website link of the bookshop" name="webSiteLink" required>
+            <input th:value="${bookshop?.bookshopEmail}" placeholder="Enter the email of the bookshop" name="bookshopEmail" required>
+            <input th:value="${bookshop?.phoneNumber}" placeholder="Enter the phone number of the bookshop" name="phoneNumber" required>
+            <input th:value="${bookshop?.webSiteLink}" placeholder="Enter the website link of the bookshop" name="webSiteLink" required>
 
-        <input name="latitude" type="hidden" id="latitude">
-        <input name="longitude" type="hidden" id="longitude">
+            <input name="latitude" type="hidden" id="latitude">
+            <input name="longitude" type="hidden" id="longitude">
 
-        <div>
-            <h4>Select the books in this bookshop</h4>
-            <select class="form-control" name="books" multiple required>
-                <option th:selected="${bookshop?.books?.contains(book)}" th:each="book : ${books}"
-                        th:text="${book.name}" th:value="${book.id}"> [book]
-                </option>
-            </select>
+            <div>
+                <h4>Select the books in this bookshop</h4>
+                <select class="form-control" name="books" multiple required>
+                    <option th:selected="${bookshop?.books?.contains(book)}" th:each="book : ${books}"
+                            th:text="${book.name}" th:value="${book.id}"> [book]
+                    </option>
+                </select>
+            </div>
+            <div style="display: flex; align-items: stretch;">
+                <button style="flex: 1;" class="btn btn-dark btn-lg m-2" id="submit" type="submit" disabled>Save</button>
+                <button style="flex: 1;" class="btn btn-dark btn-lg m-2" type="reset">Clear</button>
+                <a style="flex: 1;" th:href="@{/bookshops/all}" class="btn btn-dark btn-lg m-2">Back</a>
+            </div>
+        </form>
         </div>
-        <div style="display: flex; align-items: stretch;">
-            <button style="flex: 1;" class="btn btn-dark btn-lg m-2" id="submit" type="submit" disabled>Save</button>
-            <button style="flex: 1;" class="btn btn-dark btn-lg m-2" type="reset">Clear</button>
-            <a style="flex: 1;" th:href="@{/bookshops/all}" class="btn btn-dark btn-lg m-2">Back</a>
+        <div id="right">
+            <h5 class="text-center">Choose the location of the bookshop</h5>
+            <div id="map"></div>
         </div>
-    </form>
     </div>
-    <div id="right">
-        <h5 class="text-center">Choose the location of the bookshop</h5>
-        <div id="map"></div>
-    </div>
-</div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+            crossorigin="anonymous"></script>
+    <script>
+        var map = L.map('map').setView([41.994626, 21.430379], 13);
+        const attribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
+        const tileUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+        const tiles = L.tileLayer(tileUrl, {attribution})
+        tiles.addTo(map);
 
+        var user = L.marker();
+        map.on('click', onMapClick);
+        function onMapClick(e) {
+            user.setLatLng(e.latlng).addTo(map);
+            document.getElementById("submit").disabled = false;
+            document.getElementById("latitude").value = e.latlng.lat;
+            document.getElementById("longitude").value = e.latlng.lng;
+        }
 
-<script>
-    var map = L.map('map').setView([41.994626, 21.430379], 13);
-    const attribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
-    const tileUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-    const tiles = L.tileLayer(tileUrl, {attribution})
-    tiles.addTo(map);
-
-
-
-    var user = L.marker();
-    map.on('click', onMapClick);
-    function onMapClick(e) {
-        user.setLatLng(e.latlng).addTo(map);
-        document.getElementById("submit").disabled = false;
-        document.getElementById("latitude").value = e.latlng.lat;
-        document.getElementById("longitude").value = e.latlng.lng;
-    }
-
-
-
-</script>
+    </script>
 </body>
 </html>

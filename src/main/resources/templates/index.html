@@ -29,96 +29,86 @@
 </head>
 
 <body>
-<div class="wrapper">
-    <!-- Sidebar  -->
-    <nav id="sidebar">
-        <div class="sidebar-header">
-            <h3 id="naslov">Bookhive</h3>
-        </div>
-
-        <ul class="list-unstyled components">
-            <li th:classappend="${home_selected!=null ? 'selected' : 'notselected'}">
-                <a th:href="@{/user}">Home</a>
-            </li>
-            <li sec:authorize="hasRole('ROLE_USER')" th:classappend="${mybooks_selected!=null ? 'selected' : 'notselected'}">
-                <a th:href="@{/my-books}">My Books</a>
-            </li>
-            <li sec:authorize="hasRole('ROLE_USER')" th:classappend="${mybookclubs_selected!=null ? 'selected' : 'notselected'}">
-                <a th:href="@{/my-bookclubs}">My Book Clubs</a>
-            </li>
-            <li sec:authorize="hasRole('ROLE_USER')" th:classappend="${mywishlist_selected!=null ? 'selected' : 'notselected'}">
-                <a th:href="@{/my-wishlist}">My Wishlist</a>
-            </li>
-            <li th:classappend="${authors_selected!=null ? 'selected' : 'notselected'}">
-                <a th:href="@{/authors}">Authors</a>
-            </li>
-            <li th:classappend="${books_selected!=null ? 'selected' : 'notselected'}">
-                <a th:href="@{/books}">Books</a>
-            </li>
-            <li sec:authorize="hasRole('ROLE_USER')" th:classappend="${bookclubs_selected!=null ? 'selected' : 'notselected'}">
-                <a th:href="@{/bookclubs}">Book Clubs</a>
-            </li>
-            <li sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')" th:classappend="${invitations_selected!=null ? 'selected' : 'notselected'}">
-                <a th:href="@{/invitations}" class="position-relative">
-                    Invitations <span th:if="${invitations!=null && invitations.size()>0}" th:text="${'(' + invitations.size()} + ')'"></span>
-                </a>
-            </li>
-            <li  th:classappend="${bookshops_selected!=null ? 'selected' : 'notselected'}">
-                <a th:href="@{/bookshops/all}">Bookshops</a>
-            </li>
-            <!--                <li>-->
-            <!--                    <a href="#">Logout</a>-->
-            <!--                </li>-->
-        </ul>
-
-            <div sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')" id="logout" style="position: fixed;">
-                <a href="/logout">Logout</a>
+    <div class="wrapper">
+        <!-- Sidebar  -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h3 id="naslov">Bookhive</h3>
             </div>
-    </nav>
 
-    <!-- Page Content  -->
-    <div id="content">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light" id="topbar">
-            <div class="container-fluid">
-
-                <button type="button" id="sidebarCollapse" class="btn btn-info">
-                    <i class="fas fa-align-left"></i>
-                    <span></span>
-                </button>
-
-                <div sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')" id="navbarSupportedContent">
-                    <ul class="nav navbar-nav ml-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link" th:href="@{/user/profile}" id="myProfile">My profile</a>
-                        </li>
-                    </ul>
+            <ul class="list-unstyled components">
+                <li th:classappend="${home_selected!=null ? 'selected' : 'notselected'}">
+                    <a th:href="@{/user}">Home</a>
+                </li>
+                <li sec:authorize="hasRole('ROLE_USER')" th:classappend="${mybooks_selected!=null ? 'selected' : 'notselected'}">
+                    <a th:href="@{/my-books}">My Books</a>
+                </li>
+                <li sec:authorize="hasRole('ROLE_USER')" th:classappend="${mybookclubs_selected!=null ? 'selected' : 'notselected'}">
+                    <a th:href="@{/my-bookclubs}">My Book Clubs</a>
+                </li>
+                <li sec:authorize="hasRole('ROLE_USER')" th:classappend="${mywishlist_selected!=null ? 'selected' : 'notselected'}">
+                    <a th:href="@{/my-wishlist}">My Wishlist</a>
+                </li>
+                <li th:classappend="${authors_selected!=null ? 'selected' : 'notselected'}">
+                    <a th:href="@{/authors}">Authors</a>
+                </li>
+                <li th:classappend="${books_selected!=null ? 'selected' : 'notselected'}">
+                    <a th:href="@{/books}">Books</a>
+                </li>
+                <li sec:authorize="hasRole('ROLE_USER')" th:classappend="${bookclubs_selected!=null ? 'selected' : 'notselected'}">
+                    <a th:href="@{/bookclubs}">Book Clubs</a>
+                </li>
+                <li sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')" th:classappend="${invitations_selected!=null ? 'selected' : 'notselected'}">
+                    <a th:href="@{/invitations}" class="position-relative">
+                        Invitations <span th:if="${invitations!=null && invitations.size()>0}" th:text="${'(' + invitations.size()} + ')'"></span>
+                    </a>
+                </li>
+                <li  th:classappend="${bookshops_selected!=null ? 'selected' : 'notselected'}">
+                    <a th:href="@{/bookshops/all}">Bookshops</a>
+                </li>
+            </ul>
+                <div sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')" id="logout" style="position: fixed;">
+                    <a href="/logout">Logout</a>
                 </div>
-            </div>
         </nav>
 
-        <div th:include="${bodyContent}">   <!-- BODY CONTENT -->
-
+        <!-- Page Content  -->
+        <div id="content">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light" id="topbar">
+                <div class="container-fluid">
+                    <button type="button" id="sidebarCollapse" class="btn btn-info">
+                        <i class="fas fa-align-left"></i>
+                        <span></span>
+                    </button>
+                    <div sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')" id="navbarSupportedContent">
+                        <ul class="nav navbar-nav ml-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link" th:href="@{/user/profile}" id="myProfile">My profile</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <div th:include="${bodyContent}">
+                <!-- BODY CONTENT -->
+            </div>
         </div>
-
     </div>
-</div>
 
-<!-- jQuery CDN - Slim version (=without AJAX) -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-        crossorigin="anonymous"></script>
+    <!-- jQuery CDN - Slim version (=without AJAX) -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+            crossorigin="anonymous"></script>
 
-
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('#sidebarCollapse').on('click', function () {
-            $('#sidebar').toggleClass('active');
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+            });
         });
-    });
-</script>
+    </script>
 </body>
-
 </html>

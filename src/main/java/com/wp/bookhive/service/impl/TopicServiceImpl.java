@@ -13,9 +13,7 @@ import com.wp.bookhive.repository.UserRepository;
 import com.wp.bookhive.service.TopicService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -43,33 +41,25 @@ public class TopicServiceImpl implements TopicService {
 
     @Override
     public Topic save(String title, Integer userId, Integer bookClubId) {
-
         if (this.topicRepository.findByTitle(title).isPresent()) {
             throw new TopicAlreadyExistsException(title);
         }
-
         User user = this.userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException(userId));
         BookClub bookClub = this.bookclubRepository.findById(bookClubId).orElseThrow(() -> new BookclubNotFoundException(bookClubId));
-
-
         return this.topicRepository.save(new Topic(user, bookClub, title));
     }
 
     @Override
     public Topic edit(Integer topicId, String title, Integer userId, Integer bookClubId) {
-
         if (this.topicRepository.findByTitle(title).isPresent()) {
             throw new TopicAlreadyExistsException(title);
         }
-
         Topic topic = this.findById(topicId);
-
         topic.setTitle(title);
         User user = this.userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException(userId));
         topic.setUser(user);
         BookClub bookClub = this.bookclubRepository.findById(bookClubId).orElseThrow(() -> new BookclubNotFoundException(bookClubId));
         topic.setBookClub(bookClub);
-
         return this.topicRepository.save(topic);
     }
 

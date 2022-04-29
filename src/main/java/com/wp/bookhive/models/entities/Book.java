@@ -4,12 +4,9 @@ import com.wp.bookhive.models.enums.Genres;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 
 @Data
 @Entity
@@ -26,7 +23,6 @@ public class Book {
     private String description;
     private LocalDate datePublished;
     private String coverImageUrl;
-
 
     @ElementCollection
     private List<Genres> genres;
@@ -46,17 +42,5 @@ public class Book {
         this.authors = authors;
         this.genres = genres;
     }
-
-    //    private Double price;
-//    private Double discount;
-//    treba da bidat vo relacijata pomegju book i bookshop
-
-//    private long cursor
-//    treba da bide vo relacijata pomegju book i user
-
-//    private List<Publisher>
-//    treba da bide vo relacija many to many
-//    edna kniga moze da ja izdavaat povekje izdavacki kukji
-//    edna izdavacka kukja moze da izdava povekje knigi
 
 }

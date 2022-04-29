@@ -7,7 +7,6 @@ import com.wp.bookhive.repository.BookRepository;
 import com.wp.bookhive.repository.BookshopRepository;
 import com.wp.bookhive.service.BookshopService;
 import org.springframework.stereotype.Service;
-
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Objects;
@@ -33,7 +32,6 @@ public class BookshopServiceImpl implements BookshopService {
         return this.bookshopRepository.findAllByNameContainingIgnoreCase(search);
     }
 
-
     @Override
     public BookShop findById(Integer bookshopId) {
         return this.bookshopRepository.findById(bookshopId).orElseThrow(() -> new BookshopNotFoundException(bookshopId));
@@ -43,7 +41,6 @@ public class BookshopServiceImpl implements BookshopService {
     @Transactional
     public BookShop edit(Integer bookshopId, String address, String city, String name, String bookshopEmail, String phoneNumber, String webSiteLink, String latitude, String longitude, List<Integer> books) {
         BookShop bookShop = this.bookshopRepository.findById(bookshopId).orElseThrow(() -> new BookshopNotFoundException(bookshopId));
-
         this.checkAddress(address, bookShop);
         this.checkCity(city, bookShop);
         this.checkLatAndLot(latitude, longitude, bookShop);
@@ -82,7 +79,6 @@ public class BookshopServiceImpl implements BookshopService {
     @Transactional
     public BookShop save(String address, String city, String name, String bookshopEmail, String phoneNumber, String webSiteLink, String latitude, String longitude, List<Integer> books) {
         BookShop bookShop = new BookShop();
-
         this.checkAddress(address, bookShop);
         this.checkCity(city, bookShop);
         this.checkLatAndLot(latitude, longitude, bookShop);

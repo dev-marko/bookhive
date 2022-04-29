@@ -23,7 +23,6 @@ public class InvitationServiceImpl implements InvitationService {
     private final UserRepository userRepository;
     private final BookclubRepository bookclubRepository;
 
-
     @Override
     public Invitation findById(Integer invitationId) {
         return this.invitationRepository.findById(invitationId).orElseThrow(() -> new InvitationNotFoundException(invitationId));
@@ -38,7 +37,6 @@ public class InvitationServiceImpl implements InvitationService {
     @Override
     public List<Invitation> findByBookClubAndIsRequest(Integer bookClubId, Boolean isRequest) {
         BookClub bookClub = this.bookclubRepository.findById(bookClubId).orElseThrow(() -> new BookclubNotFoundException(bookClubId));
-
         return this.invitationRepository.findByBookClubAndIsRequest(bookClub, isRequest);
     }
 
@@ -53,7 +51,6 @@ public class InvitationServiceImpl implements InvitationService {
         User sender = this.userRepository.findById(senderId).orElseThrow(() -> new UserNotFoundException(senderId));
         User receiver = this.userRepository.findByEmail(receiverEmail).orElseThrow(() -> new UserNotFoundException(receiverEmail));
         BookClub bookClub = this.bookclubRepository.findById(bookClubId).orElseThrow(() -> new BookclubNotFoundException(bookClubId));
-
         return this.invitationRepository.save(new Invitation(sender, receiver, bookClub, message, isRequest));
     }
 

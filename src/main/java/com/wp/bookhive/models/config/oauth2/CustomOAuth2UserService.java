@@ -5,15 +5,11 @@ import com.wp.bookhive.models.enums.AuthenticationType;
 import com.wp.bookhive.models.enums.Roles;
 import com.wp.bookhive.repository.UserRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserRequest;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
-import org.springframework.security.oauth2.client.userinfo.OAuth2UserService;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
-import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
-
 import java.util.Optional;
 
 @Service

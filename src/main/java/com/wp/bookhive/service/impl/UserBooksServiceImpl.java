@@ -11,7 +11,6 @@ import com.wp.bookhive.repository.UserRepository;
 import com.wp.bookhive.service.UserBooksService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
@@ -79,4 +78,5 @@ public class UserBooksServiceImpl implements UserBooksService {
         user.getWishlist().remove(book);
         this.userRepository.save(user);
     }
+
 }

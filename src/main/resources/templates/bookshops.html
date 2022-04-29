@@ -1,45 +1,40 @@
-<!--    <link rel="stylesheet" href="/bookshops_style.css">-->
-
 <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/bookshops/add}" class="btn text-white"
    style="background-color: #008C76;">
     Add a Bookshop
 </a>
-
-
-    <div class="w-50 my-4 mx-auto" id="searchCont">
-        <form method="post" action="/bookshops/search">
-            <input type="text" class="form-control" placeholder="Enter a bookshop name..." name="search">
-            <button class="btn btn-dark w-100 mt-2" type="submit"><i class="fa fa-search"></i>Search</button>
-        </form>
-    </div>
-    <div class="container" id="c2">
-        <div th:each="bookshop : ${bookshops}" class="row">
-            <div class="card mb-3 mx-auto" style="max-width: 540px; ">
-                <div class="row">
-                    <div class="col-md-4 d-flex align-items-center">
-                        <img
-                                src="/bookstore_1.png"
-                                alt="Bookshop_Image"
-                                class="h-75 img-fluid ms-3"
-                        />
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h5 class="card-title" th:text="${bookshop.name}">Просветно дело</h5>
-                            <p class="card-text" th:text="${bookshop.address}">Ул. Димитрие Чуповски 15</p>
-                            <p class="card-text" th:text="${bookshop.phoneNumber}">+389 (0) 2 3117 255</p>
-                            <p class="card-text" th:text="${bookshop.bookshopEmail}">goran.dukoski@yahoo.com</p>
-                            <p class="card-text">
-                                <a th:href="${bookshop.webSiteLink}" class="link-info" style="text-decoration: none;color: black !important;">Линк кон веб страна</a>
-                            </p>
-                            <form method="post" th:action="@{'/bookshops/delete/{id}' (id=${bookshop.id})}" sec:authorize="hasRole('ROLE_ADMIN')">
-                                <a th:href="@{'/bookshops/{id}' (id=${bookshop.id})}" class="btn btn-danger">View details</a>
-                                <a th:href="@{'/bookshops/edit/{id}' (id=${bookshop.id})}" sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-danger">Edit</a>
-                                <button type="submit" class="btn btn-danger">Delete</button></form>
-                            </div>
+<div class="w-50 my-4 mx-auto" id="searchCont">
+    <form method="post" action="/bookshops/search">
+        <input type="text" class="form-control" placeholder="Enter a bookshop name..." name="search">
+        <button class="btn btn-dark w-100 mt-2" type="submit"><i class="fa fa-search"></i>Search</button>
+    </form>
+</div>
+<div class="container" id="c2">
+    <div th:each="bookshop : ${bookshops}" class="row">
+        <div class="card mb-3 mx-auto" style="max-width: 540px; ">
+            <div class="row">
+                <div class="col-md-4 d-flex align-items-center">
+                    <img
+                            src="/bookstore_1.png"
+                            alt="Bookshop_Image"
+                            class="h-75 img-fluid ms-3"
+                    />
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${bookshop.name}">Просветно дело</h5>
+                        <p class="card-text" th:text="${bookshop.address}">Ул. Димитрие Чуповски 15</p>
+                        <p class="card-text" th:text="${bookshop.phoneNumber}">+389 (0) 2 3117 255</p>
+                        <p class="card-text" th:text="${bookshop.bookshopEmail}">goran.dukoski@yahoo.com</p>
+                        <p class="card-text">
+                            <a th:href="${bookshop.webSiteLink}" class="link-info" style="text-decoration: none;color: black !important;">Линк кон веб страна</a>
+                        </p>
+                        <form method="post" th:action="@{'/bookshops/delete/{id}' (id=${bookshop.id})}" sec:authorize="hasRole('ROLE_ADMIN')">
+                            <a th:href="@{'/bookshops/{id}' (id=${bookshop.id})}" class="btn btn-danger">View details</a>
+                            <a th:href="@{'/bookshops/edit/{id}' (id=${bookshop.id})}" sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-danger">Edit</a>
+                            <button type="submit" class="btn btn-danger">Delete</button></form>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
+</div>

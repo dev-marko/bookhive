@@ -1,19 +1,14 @@
 package com.wp.bookhive.web.controllers;
 
-import com.wp.bookhive.models.config.oauth2.CustomOAuth2User;
-import com.wp.bookhive.models.entities.Author;
 import com.wp.bookhive.models.entities.Invitation;
 import com.wp.bookhive.models.entities.User;
 import com.wp.bookhive.service.InvitationService;
 import com.wp.bookhive.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @Controller
@@ -25,15 +20,9 @@ public class UserController {
     private final InvitationService invitationService;
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
-    @GetMapping()    //dali da se stavi @PathVariable za userId?
+    @GetMapping()
     public String getUserViewPage(Model model) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User user;
-        if(auth.getPrincipal() instanceof CustomOAuth2User customOAuth2User) {
-            user = userService.findByEmail(customOAuth2User.getEmail());
-        } else {
-            user = (User) auth.getPrincipal();
-        }
+        User user = userService.getAuthenticatedUser();
 
         List<Invitation> invitations = this.invitationService.findByReceiver(user.getEmail());
 
@@ -43,21 +32,13 @@ public class UserController {
 
         model.addAttribute("bodyContent", "landing-page");
         model.addAttribute("home_selected", true);
-
         return "index";
     }
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     @GetMapping("/profile")
     public String getMyProfilePage(Model model) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User user;
-        if(auth.getPrincipal() instanceof CustomOAuth2User customOAuth2User) {
-            user = userService.findByEmail(customOAuth2User.getEmail());
-        } else {
-            user = (User) auth.getPrincipal();
-        }
-
+        User user = userService.getAuthenticatedUser();
         model.addAttribute("user", user);
         model.addAttribute("bodyContent", "my-profile");
         return "index";
@@ -73,15 +54,8 @@ public class UserController {
             @RequestParam(required = false) String email,
             @RequestParam(required = false) String password,
             @RequestParam(required = false) String confirmPassword) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User user;
-        if(auth.getPrincipal() instanceof CustomOAuth2User customOAuth2User) {
-            user = userService.findByEmail(customOAuth2User.getEmail());
-        } else {
-            user = (User) auth.getPrincipal();
-        }
+        User user = userService.getAuthenticatedUser();
         userService.update(user,name,surname,age,address,email,password,confirmPassword);
-
         return "redirect:/user";
     }
 }

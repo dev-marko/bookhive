@@ -1,6 +1,5 @@
 package com.wp.bookhive.web.controllers;
 
-import com.wp.bookhive.models.enums.Roles;
 import com.wp.bookhive.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -22,14 +21,6 @@ public class RegisterController {
 
     @GetMapping
     public String getRegisterPage(@RequestParam(required = false) String error, Model model){
-
-//        if (error != null && !error.isEmpty()) {
-//            model.addAttribute("hasErrors", true);
-//            model.addAttribute("error", error);
-//        }
-
-        //model.addAttribute("bodyContent", "register");
-
         return "register";
     }
 
@@ -45,6 +36,5 @@ public class RegisterController {
         } catch (InvalidParameterException | BadCredentialsException e) {
             return "redirect:/register?error=" + e.getMessage();
         }
-
     }
 }

@@ -28,16 +28,12 @@
                              th:src="${book.getCoverImageUrl()}"
                              th:alt="${book.getName()}" style="height: 400px;"/>
                         <h5 class="card-title mt-3 mb-0" th:text="${book.getName()}">
-                            <!--Злосторство и казна-->
                         </h5>
                         <p class="card-subtitle fs-6 fst-italic mt-0 mb-3">
                         <span th:each="author : ${book.getAuthors()}"
                               th:text="${author.getName() + ' ' + author.getSurname() + ', '}"></span>
-                            <!--автор: Фјодор Достоевски-->
-                            <!-- ke ni treba BookDto za books.html stranava-->
                         </p>
                         <p class="card-text text-muted d-none d-lg-block" th:text="${book.getDescription()}">
-                            <!-- Lorem ipsum dolor, sit amet consectetur adipisicing elit. -->
                         </p>
                         <div class="me-2">
                             <div sec:authorize="hasRole('ROLE_USER')" class="d-inline-block p-0">
@@ -59,7 +55,6 @@
                                 </form>
                             </div>
                             <div sec:authorize="hasRole('ROLE_USER')" class="d-inline-block p-0">
-
                                 <form th:method="POST"
                                       th:action="@{'/my-books/add/{id}' (id=${book.getId()})}">
                                     <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{'/books/{id}/edit' (id=${book.getId()})}" class="btn btn-sm text-white mt-3" style="background-color: #008C76;">
@@ -79,8 +74,6 @@
                 </div>
             </div>
         </div>
-
-
 
         <div class="row col-lg-2 my-5 align-items-start justify-content-start">
         </div>

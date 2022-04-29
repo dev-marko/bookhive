@@ -1,6 +1,5 @@
 package com.wp.bookhive.web.controllers;
 
-import com.wp.bookhive.models.config.oauth2.CustomOAuth2User;
 import com.wp.bookhive.models.entities.Book;
 import com.wp.bookhive.models.entities.User;
 import com.wp.bookhive.models.entities.UserBook;
@@ -8,15 +7,12 @@ import com.wp.bookhive.service.UserBooksService;
 import com.wp.bookhive.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import java.util.List;
 
 /**
@@ -35,13 +31,6 @@ public class UserBooksController {
     @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping("/my-books")
     public String getMyBooksPage(Model model) {
-//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-//        User user;
-//        if(auth.getPrincipal() instanceof CustomOAuth2User customOAuth2User) {
-//            user = userService.findByEmail(customOAuth2User.getEmail());
-//        } else {
-//            user = (User) auth.getPrincipal();
-//        }
         User user = userService.getAuthenticatedUser();
         List<UserBook> userBooks = this.userBooksService.getMyBooks(user.getId());
         model.addAttribute("userBooks", userBooks);

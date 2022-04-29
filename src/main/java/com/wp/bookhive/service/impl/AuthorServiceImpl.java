@@ -1,7 +1,6 @@
 package com.wp.bookhive.service.impl;
 
 import com.wp.bookhive.models.entities.Author;
-import com.wp.bookhive.models.entities.Book;
 import com.wp.bookhive.models.exceptions.AuthorNotFoundException;
 import com.wp.bookhive.repository.AuthorRepository;
 import com.wp.bookhive.repository.BookRepository;
@@ -41,12 +40,10 @@ public class AuthorServiceImpl implements AuthorService {
     @Override
     public Author edit(Integer id, String name, String surname, Integer age, String biography) {
         Author author = this.findById(id);
-
         author.setName(name);
         author.setSurname(surname);
         author.setAge(age);
         author.setBiography(biography);
-
         return this.authorRepository.save(author);
     }
 

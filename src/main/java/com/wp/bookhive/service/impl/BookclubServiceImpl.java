@@ -9,7 +9,6 @@ import com.wp.bookhive.repository.UserRepository;
 import com.wp.bookhive.service.BookclubService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
@@ -51,12 +50,10 @@ public class BookclubServiceImpl implements BookclubService {
     @Override
     public BookClub edit(Integer bookClubId, String name, Integer ownerId, String description) {
         BookClub bookClub = this.findById(bookClubId);
-
         bookClub.setName(name);
         User owner = this.userRepository.findById(ownerId).orElseThrow(() -> new UserNotFoundException(ownerId));
         bookClub.setOwner(owner);
         bookClub.setDescription(description);
-
         return this.bookclubRepository.save(bookClub);
     }
 

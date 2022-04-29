@@ -1,6 +1,4 @@
 <th:block xmlns:th="http://www.thymeleaf.org">
-
-
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
             integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous">
     </script>
@@ -15,7 +13,6 @@
             })
         });
     </script>
-
     <div class="container">
         <div class="row" th:each="userBook : ${userBooks}">
             <div class="shadow card mb-3  mx-auto" style="max-width: 820px;">
@@ -75,8 +72,6 @@
         </div>
     </div>
 
-
-    <!-- Modal -->
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
@@ -100,5 +95,4 @@
             </div>
         </div>
     </div>
-
 </th:block>

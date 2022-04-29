@@ -12,7 +12,6 @@ var bookicon = L.icon({
     const tiles = L.tileLayer(tileUrl, { attribution })
     tiles.addTo(map);
 
-
     let myPosition;
     function geolocation() {
         if (navigator.geolocation) {
@@ -38,8 +37,6 @@ var bookicon = L.icon({
     document.getElementById("distance").innerHTML = "Растојанието од вас до книжара "+selectedStoreName+" изнесува <strong>" + (distance / 1000).toFixed(1) + " километри</strong>."
     document.getElementById("duration").innerHTML = "Времето за да стигнете до книжара "+selectedStoreName+" со автомобил изнесува <strong>" + (duration / 60).toFixed(0) + " минути</strong>."
     }
-
-
 
 async function loadBookshops(){
         var bookId = document.getElementById("bookId").value

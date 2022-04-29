@@ -15,11 +15,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import javax.transaction.Transactional;
 import java.security.InvalidParameterException;
-import java.util.Objects;
-import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -40,16 +37,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User register(String name, String surname, String email, String password, String repeatPassword) {
-        // TODO custom exception
         if (email==null || email.isEmpty()  || password==null || password.isEmpty())
             throw new InvalidParameterException();
 
         if (!password.equals(repeatPassword))
-            //TODO: throw new PasswordsDoNotMatchException();
             throw new BadCredentialsException("Invalid Credentials");
 
         if(this.userRepository.findByEmail(email).isPresent())
-            //TODO: throw new UsernameAlreadyExistsException(email);
             throw new BadCredentialsException("Invalid Credentials");
 
         User user = new User(name, surname, email, passwordEncoder.encode(password));
@@ -84,22 +78,13 @@ public class UserServiceImpl implements UserService {
         }
 
         if(user.getAuthType().equals(AuthenticationType.DATABASE) && email != null && email.contains("@") && email.length() > 1) {
-            //if (this.userRepository.findAll().stream()
-                    //.noneMatch(u -> !Objects.equals(u.getId(), user.getId()) && user.getEmail().equals(email))) {
-                user.setEmail(email);
-//            } else {
-//                throw new EmailAlreadyExistsException(email);
-//            }
+            user.setEmail(email);
         }
-//        else {
-//            throw new EmailNotValidException(email);
-//        }
 
         user.setAddress(address);
 
         if (user.getAuthType().equals(AuthenticationType.DATABASE) && !confirmPassword.equals("") && !password.equals("") && password.equals(confirmPassword))
             user.setPassword(passwordEncoder.encode(password));
-
 
         return this.userRepository.save(user);
     }
@@ -120,6 +105,5 @@ public class UserServiceImpl implements UserService {
         }
         return user;
     }
-
 
 }

@@ -1,6 +1,5 @@
 package com.wp.bookhive.web.controllers;
 
-import com.wp.bookhive.models.entities.Book;
 import com.wp.bookhive.models.entities.BookShop;
 import com.wp.bookhive.service.BookService;
 import com.wp.bookhive.service.BookshopService;
@@ -9,7 +8,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RequestMapping("/bookshops")
@@ -71,7 +69,6 @@ public class BookshopController {
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    //edit na bookshop info
     @PostMapping("/add")
     public String saveBookshop(@RequestParam(required = false) Integer bookshopId,
                                @RequestParam String address,
@@ -82,8 +79,7 @@ public class BookshopController {
                                @RequestParam String webSiteLink,
                                @RequestParam String latitude,
                                @RequestParam String longitude,
-                               @RequestParam List<Integer> books,
-                               Model model) {
+                               @RequestParam List<Integer> books) {
         if (bookshopId != null) {
             this.bookshopService.edit(bookshopId, address, city, name, bookshopEmail, phoneNumber, webSiteLink, latitude, longitude, books);
         } else {
@@ -93,31 +89,9 @@ public class BookshopController {
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @GetMapping("/edit/{bookshopId}/add-book")
-    public String getAddBookForm(@PathVariable Integer bookshopId, Model model) {
-        BookShop bookshop = this.bookshopService.findById(bookshopId);
-        model.addAttribute("bookshop", bookshop);
-        return ""; //blagoj view
-    }
-
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    //edit na bookshop books
-    @PostMapping("/edit/{bookshopId}/add-book")
-    public String addBook(@PathVariable Integer bookshopId,
-                          @RequestParam String isbn,
-                          @RequestParam String name,
-                          @RequestParam String description,
-                          @RequestParam String datePublished,
-                          Model model) {
-        //lista od avtori
-        //this.bookshopService.addBook(bookshopId, isbn, name, description, datePublished);
-        return ""; //redirect kon @GetMapping("/{bookshopId}")
-    }
-
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/delete/{bookshopId}")
     public String deleteBookshop(@PathVariable int bookshopId) {
         this.bookshopService.deleteById(bookshopId);
-        return "redirect:/bookshops/all"; //sega za sega vaka neka stoi pa ke vidime otposle sto ke se vrakja i dali ke postoi ovaa metoda
+        return "redirect:/bookshops/all";
     }
 }

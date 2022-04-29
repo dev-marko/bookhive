@@ -40,14 +40,14 @@ public class AuthorController {
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/{id}")
-    public String getEditAuthor(@PathVariable Integer id, Model model) throws Exception {
+    public String getEditAuthor(@PathVariable Integer id, Model model) {
         Author author = authorService.findById(id);
         model.addAttribute("author", author);
         return "add-author";
     }
 
     @GetMapping("/{id}/view")
-    public String getAuthorBiography(@PathVariable Integer id, Model model) throws Exception {
+    public String getAuthorBiography(@PathVariable Integer id, Model model) {
         Author author = authorService.findById(id);
         model.addAttribute("author", author);
         return "author_bio";
@@ -60,7 +60,7 @@ public class AuthorController {
             @RequestParam String name,
             @RequestParam String surname,
             @RequestParam Integer age,
-            @RequestParam(required = false) String biography) throws Exception {
+            @RequestParam(required = false) String biography) {
         Author author = this.authorService.findById(id);
         authorService.edit(author.getId(), name, surname, age, biography);
         return "redirect:/authors";

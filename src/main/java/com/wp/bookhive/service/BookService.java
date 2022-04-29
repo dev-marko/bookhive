@@ -4,7 +4,6 @@ import com.wp.bookhive.models.entities.Book;
 import com.wp.bookhive.models.enums.Genres;
 import com.wp.bookhive.models.pages.BookPage;
 import org.springframework.data.domain.Page;
-
 import java.time.LocalDate;
 import java.util.List;
 

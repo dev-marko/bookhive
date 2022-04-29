@@ -10,11 +10,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Fredoka&display=swap" rel="stylesheet">
     <style>
         @import 'https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300';
-
         body {
             background-color: #174a45
         }
-
         #container {
             display: flex;
             width: 1000px;
@@ -22,22 +20,14 @@
             justify-content: space-between;
             margin: 40px auto auto;
         }
-
         #registerlinks{
             display: flex;
             margin-top: 10px;
         }
-
         #registerlinks a:first-child{
             flex: 1;
             margin-right: 10px;
         }
-        #links{
-            margin-top: 10px;
-            margin-bottom: 200px;
-        }
-
-
         input {
             width: 100%;
             height: 40px;
@@ -48,36 +38,28 @@
             box-shadow: none;
             font-size: 16px;
             color: #fff;
-
         }
-
         input:hover {
             border-bottom: 3px solid greenyellow;
         }
-
         ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
             color: white;
             font-family: "Segoe UI", sans-serif;
             opacity: 1; /* Firefox */
         }
-
         #loginbtn {
             width: 100%;
             margin-top: 20px;
             display: block;
         }
-
         #logo {
             font-family: 'Fredoka', sans-serif;
             font-size: 50px;
             color: white;
         }
-
         #form{
             margin-top: 70px;
         }
-
-
         /*
         ========================
               BUTTON ONE
@@ -140,57 +122,54 @@
             opacity: 0;
             transform: scale(0.1, 1);
         }
-
-
     </style>
 </head>
 <body>
-<div id="container">
-    <div id="left">
+    <div id="container">
+        <div id="left">
 
-        <a style="text-decoration: none;" href="/books">
-            <div class="btn-one">
-                <span>Books</span>
-            </div>
-        </a>
-
-        <a style="text-decoration: none;" href="/authors">
-            <div class="box-1">
+            <a style="text-decoration: none;" href="/books">
                 <div class="btn-one">
-                    <span>Authors</span>
+                    <span>Books</span>
                 </div>
-            </div>
-        </a>
+            </a>
 
-        <a style="text-decoration: none;" href="/bookshops/all">
-            <div class="box-1">
-                <div class="btn-one">
-                    <span>Bookshops</span>
+            <a style="text-decoration: none;" href="/authors">
+                <div class="box-1">
+                    <div class="btn-one">
+                        <span>Authors</span>
+                    </div>
                 </div>
+            </a>
+
+            <a style="text-decoration: none;" href="/bookshops/all">
+                <div class="box-1">
+                    <div class="btn-one">
+                        <span>Bookshops</span>
+                    </div>
+                </div>
+            </a>
+
+            <form id="form" method="post" th:action="@{/home}">
+                <input type="text" name="username" placeholder="Email"><br>
+                <input type="password" name="password" placeholder="Password">
+                <button id="loginbtn" class="btn btn-dark btn-lg" type="submit">Login</button>
+            </form>
+            <div id="registerlinks">
+            <a href="/register" id="registerbtn" class="btn btn-dark btn-lg" type="submit">Register</a>
+            <a th:href="@{/oauth2/authorization/google}" id="springsocialbtn" class="btn btn-dark btn-lg" type="submit">Google Login</a>
             </div>
-        </a>
 
-
-        <form id="form" method="post" th:action="@{/home}">
-            <input type="text" name="username" placeholder="Email"><br>
-            <input type="password" name="password" placeholder="Password">
-            <button id="loginbtn" class="btn btn-dark btn-lg" type="submit">Login</button>
-        </form>
-        <div id="registerlinks">
-        <a href="/register" id="registerbtn" class="btn btn-dark btn-lg" type="submit">Register</a>
-        <a th:href="@{/oauth2/authorization/google}" id="springsocialbtn" class="btn btn-dark btn-lg" type="submit">Google Login</a>
         </div>
-
+        <div id="right">
+            <h3 id="logo" class="text-center">Bookhive</h3>
+            <img src="/library.png" width="550" height="550" alt="library"/>
+        </div>
     </div>
-    <div id="right">
-        <h3 id="logo" class="text-center">Bookhive</h3>
-        <img src="/library.png" width="550" height="550" alt="library"/>
-    </div>
-</div>
 
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+            crossorigin="anonymous"></script>
 </body>
 </html>
