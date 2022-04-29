@@ -97,11 +97,9 @@ public class UserServiceImpl implements UserService {
 
         user.setAddress(address);
 
-        if (user.getAuthType().equals(AuthenticationType.DATABASE) && !confirmPassword.equals("") && !password.equals("") && password.equals(confirmPassword)) {
+        if (user.getAuthType().equals(AuthenticationType.DATABASE) && !confirmPassword.equals("") && !password.equals("") && password.equals(confirmPassword))
             user.setPassword(passwordEncoder.encode(password));
-        } else {
-            throw new BadCredentialsException("Invalid Credentials");
-        }
+
 
         return this.userRepository.save(user);
     }
