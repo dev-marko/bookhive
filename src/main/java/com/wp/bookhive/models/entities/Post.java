@@ -24,6 +24,7 @@ public class Post {
     @JoinColumn
     private User user;
 
+    @Column(columnDefinition="TEXT")
     private String content;
 
     private LocalDate dateCreated;

@@ -29,6 +29,7 @@ public class BookClub {
     @OneToMany(mappedBy = "bookClub", cascade = CascadeType.ALL)
     private List<Topic> topics;
 
+    @Column(columnDefinition="TEXT")
     private String description;
 
     public BookClub(String name, User owner, String description) {

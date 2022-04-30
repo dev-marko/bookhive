@@ -42,23 +42,18 @@
                                 <div class="d-inline-block p-0">
                                     <form th:method="POST"
                                           th:action="@{'/my-books/remove/{id}' (id=${userBook.getBook().getId()})}">
-                                        <button type="submit" class="btn btn-outline-danger">
+                                        <button type="submit" class="btn btn-danger">
                                             Remove
                                         </button>
                                     </form>
                                 </div>
                                 <div class="d-inline-block p-0">
-                                    <button class="btn btn-outline-primary">Details</button>
+                                    <a th:href="@{'/books/{id}/view' (id=${userBook.getBook().getId()})}" class="btn btn-primary">Details</a>
                                 </div>
                                 <div class="d-inline-block p-0">
-                                    <!--                                    <form th:method="POST"
-                                                                              th:action="@{'/my-books/add/{id}' (id=${book.getId()})}">
-                                                                            <button type="submit" class="btn btn-outline-warning">
-                                                                                Edit
-                                                                            </button>
-                                                                        </form>-->
                                     <!-- Button trigger modal -->
-                                    <button type="button" class="btn btn-outline-warning"
+                                    <button type="button"
+                                            class="btn btn-warning"
                                             th:attr="data-book_id=${userBook.getBook().getId()}" data-bs-toggle="modal"
                                             data-bs-target="#exampleModal">
                                         Edit

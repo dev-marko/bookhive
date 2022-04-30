@@ -56,7 +56,7 @@
     </div>
     <div id="middle"><p th:text="${author.biography}">The biography of the author</p></div>
     <div id="books" th:if="${author?.publishedBooks.size()>0}">
-        <h2>Some of his books</h2>
+        <h2>Some of the author's books:</h2>
         <ul>
             <li th:each="book : ${author?.publishedBooks}" th:text="${book.name}"></li>
         </ul>

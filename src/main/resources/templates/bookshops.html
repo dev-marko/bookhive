@@ -26,7 +26,7 @@
                         <p class="card-text" th:text="${bookshop.phoneNumber}">+389 (0) 2 3117 255</p>
                         <p class="card-text" th:text="${bookshop.bookshopEmail}">goran.dukoski@yahoo.com</p>
                         <p class="card-text">
-                            <a th:href="${bookshop.webSiteLink}" class="link-info" style="text-decoration: none;color: black !important;">Линк кон веб страна</a>
+                            <a th:href="@{bookshop.webSiteLink}" class="link-info" style="text-decoration: none;color: black !important;">Линк кон веб страна</a>
                         </p>
                         <form method="post" th:action="@{'/bookshops/delete/{id}' (id=${bookshop.id})}" sec:authorize="hasRole('ROLE_ADMIN')">
                             <a th:href="@{'/bookshops/{id}' (id=${bookshop.id})}" class="btn btn-danger">View details</a>

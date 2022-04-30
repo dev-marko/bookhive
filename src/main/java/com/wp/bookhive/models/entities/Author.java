@@ -19,6 +19,8 @@ public class Author {
     private String name;
     private String surname;
     private Integer age;
+
+    @Lob
     private String biography;
 
     @ManyToMany(mappedBy = "authors")

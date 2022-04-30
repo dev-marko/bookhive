@@ -20,6 +20,8 @@ public class Book {
 
     private String isbn;
     private String name;
+
+    @Column(columnDefinition="TEXT")
     private String description;
     private LocalDate datePublished;
     private String coverImageUrl;
