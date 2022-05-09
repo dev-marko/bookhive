@@ -34,8 +34,8 @@ var bookicon = L.icon({
     let distance = data.features[0].properties.summary.distance;
     let duration = data.features[0].properties.summary.duration;
     document.getElementById("information").hidden = false;
-    document.getElementById("distance").innerHTML = "Растојанието од вас до книжара "+selectedStoreName+" изнесува <strong>" + (distance / 1000).toFixed(1) + " километри</strong>."
-    document.getElementById("duration").innerHTML = "Времето за да стигнете до книжара "+selectedStoreName+" со автомобил изнесува <strong>" + (duration / 60).toFixed(0) + " минути</strong>."
+    document.getElementById("distance").innerHTML = "The distance from your location to "+selectedStoreName+" is <strong>" + (distance / 1000).toFixed(1) + " kilometers</strong>."
+    document.getElementById("duration").innerHTML = "The time to arrive to "+selectedStoreName+" with a car is <strong>" + (duration / 60).toFixed(0) + " minutes</strong>."
     }
 
 async function loadBookshops(){
@@ -46,7 +46,7 @@ async function loadBookshops(){
     let parsed = await items.json();
 
     for(let item of parsed){
-        let marker = L.marker([item.latitude, item.longitude], {icon: bookicon}).addTo(map).bindPopup("<h3>"+item.name+"</h3><br><a style='width: 290px' class='btn btn-outline-dark' href=/bookshops/" + item.id + ">Детален поглед</a>");
+        let marker = L.marker([item.latitude, item.longitude], {icon: bookicon}).addTo(map).bindPopup("<h3>"+item.name+"</h3><br><a style='width: 290px' class='btn btn-outline-dark' href=/bookshops/" + item.id + ">Detailed view</a>");
         marker.on('click', () => {
             selectedStore = marker;
             selectedStoreName = item.name;
