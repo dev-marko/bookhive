@@ -81,7 +81,7 @@
         </ul>
         </div>
     </div>
-    <div style="display: flex; justify-content: center">
+    <div sec:authorize="hasRole('ROLE_USER')" style="display: flex; justify-content: center">
     <a class="button" th:href="@{'/bookshops/map/{bookId}' (bookId=${book.id})}" >Open map to view the location of the bookshops that have this book</a>
     </div>
 </body>

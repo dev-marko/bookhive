@@ -36,7 +36,7 @@
                         <p class="card-text text-muted d-none d-lg-block" th:text="${book.getDescription()}">
                         </p>
                         <div class="me-2">
-                            <div sec:authorize="hasRole('ROLE_USER')" class="d-inline-block p-0">
+                            <div sec:authorize="hasRole('ROLE_USER')" class="d-inline-block" style="position: absolute; bottom: 20px; left: 40px;">
                                 <form th:method="POST"
                                       th:action="@{'/my-wishlist/add/{id}' (id=${book.getId()})}">
                                     <button type="submit" class="btn btn-sm text-white mt-3"
@@ -45,7 +45,7 @@
                                     </button>
                                 </form>
                             </div>
-                            <div sec:authorize="hasRole('ROLE_ADMIN')" class="d-inline-block p-0">
+                            <div sec:authorize="hasRole('ROLE_ADMIN')" class="d-inline-block" style="position: absolute; bottom: 20px; left: 50px;">
                                 <form th:method="POST"
                                       th:action="@{'/books/{id}/delete' (id=${book.getId()})}">
                                     <button type="submit" class="btn btn-sm text-white mt-3"
@@ -54,13 +54,13 @@
                                     </button>
                                 </form>
                             </div>
-                            <div class="d-inline-block p-0">
+                            <div class="d-inline-block" style="position: absolute; bottom: 20px; left: 116px;">
                                 <form th:method="POST"
                                       th:action="@{'/my-books/add/{id}' (id=${book.getId()})}">
                                     <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{'/books/{id}/edit' (id=${book.getId()})}" class="btn btn-sm text-white mt-3" style="background-color: #008C76;">
                                         Edit
                                     </a>
-                                    <a sec:authorize="hasRole('ROLE_USER')" th:href="@{'/books/{id}/view' (id=${book.getId()})}" class="btn btn-sm text-white mt-3" style="background-color: #008C76;">
+                                    <a th:href="@{'/books/{id}/view' (id=${book.getId()})}" class="btn btn-sm text-white mt-3" style="background-color: #008C76;">
                                         Details
                                     </a>
                                     <button sec:authorize="hasRole('ROLE_USER')" type="submit" class="btn btn-sm text-white mt-3"
@@ -69,6 +69,7 @@
                                     </button>
                                 </form>
                             </div>
+                            <br>
                         </div>
                     </div>
                 </div>
